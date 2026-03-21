@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VishEra | WhatsApp Automation Flows</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F7F9FC;
+      --white: #FFFFFF;
+      --ink: #0D0D0D;
+      --muted: #6B7280;
+      --border: #E5E7EB;
+      --green: #25D366;
+      --green-pale: #F0FDF4;
+      --orange: #FF4D00;
+      --orange-pale: #FFF0EB;
+      --blue: #3B82F6;
+      --blue-pale: #EFF6FF;
+      --purple: #8B5CF6;
+      --purple-pale: #F5F3FF;
+      --yellow: #F59E0B;
+      --yellow-pale: #FFFBEB;
+      --red: #EF4444;
+      --red-pale: #FEF2F2;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      padding: 2rem;
+      min-height: 100vh;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .logo span { color: var(--orange); }
+    header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    header p { color: var(--muted); font-size: 1rem; font-weight: 300; }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .tab {
+      padding: 0.7rem 2rem;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: 2px solid var(--border);
+      background: var(--white);
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    .tab.active {
+      background: var(--orange);
+      color: white;
+      border-color: var(--orange);
+    }
+
+    .flow-container { display: none; }
+    .flow-container.active { display: block; }
+
+    .flow-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--ink);
+      text-align: center;
+      margin-bottom: 0.3rem;
+    }
+    .flow-sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 2.5rem;
+    }
+
+    /* FLOW GRID */
+    .flows-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .flow-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.8rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+
+    .flow-card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    /* NODES */
+    .node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      margin-bottom: 0;
+      position: relative;
+    }
+
+    .node-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .node-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .connector {
+      width: 2px;
+      height: 28px;
+      background: linear-gradient(180deg, #CBD5E1, #E2E8F0);
+      margin: 2px auto;
+      border-radius: 2px;
+    }
+
+    .node-body {
+      flex: 1;
+      padding-bottom: 1.5rem;
+    }
+
+    .node-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+
+    .node-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+
+    .node-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    .node-tool {
+      display: inline-block;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 0.18rem 0.6rem;
+      border-radius: 100px;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    /* Color variants */
+    .green { background: var(--green-pale); color: var(--green); }
+    .orange { background: var(--orange-pale); color: var(--orange); }
+    .blue { background: var(--blue-pale); color: var(--blue); }
+    .purple { background: var(--purple-pale); color: var(--purple); }
+    .yellow { background: var(--yellow-pale); color: var(--yellow); }
+    .red { background: var(--red-pale); color: var(--red); }
+
+    .label-green { color: var(--green); }
+    .label-orange { color: var(--orange); }
+    .label-blue { color: var(--blue); }
+    .label-purple { color: var(--purple); }
+    .label-yellow { color: var(--yellow); }
+    .label-red { color: var(--red); }
+
+    /* LEGEND */
+    .legend {
+      max-width: 1200px;
+      margin: 2.5rem auto 0;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+    .legend-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .legend-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .legend-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    /* N8N GUIDE */
+    .n8n-guide {
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      background: linear-gradient(135deg, #0D0D0D, #1a1a1a);
+      border-radius: 20px;
+      padding: 2rem;
+      color: white;
+    }
+    .n8n-guide h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .steps-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .step-item {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      flex: 1;
+      min-width: 160px;
+    }
+    .step-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--orange);
+      margin-bottom: 0.3rem;
+    }
+    .step-text {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 1rem; }
+      .flows-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Vish<span>Era</span></div>
+  <h1>WhatsApp Automation Flows</h1>
+  <p>Visual workflow diagrams for Restaurant & Clinic AI automation</p>
+</header>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('restaurant')">🍽️ Restaurant</div>
+  <div class="tab" onclick="switchTab('clinic')">🏥 Clinic</div>
+</div>
+
+<!-- RESTAURANT FLOWS -->
+<div class="flow-container active" id="restaurant">
+  <div class="flow-title">🍽️ Restaurant WhatsApp Automation</div>
+  <div class="flow-sub">3 powerful automation flows to run your restaurant on autopilot</div>
+
+  <div class="flows-grid">
+
+    <!-- Flow 1: Table Booking -->
+    <div class="flow-card">
+      <div class="flow-card-title">📅 Table Booking Automation</div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon green">💬</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-green">Trigger</div>
+          <div class="node-title">Customer sends WhatsApp message</div>
+          <div class="node-desc">"I want to book a table for 2 at 7pm"</div>
+          <span class="node-tool">WhatsApp Business API</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon orange">🤖</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-orange">AI Processing</div>
+          <div class="node-title">AI extracts booking details</div>
+          <div class="node-desc">Extracts date, time, guests, name from message</div>
+          <span class="node-tool">ChatGPT API</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon blue">🔍</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-blue">Check Availability</div>
+          <div class="node-title">Check table availability</div>
+          <div class="node-desc">Looks up Google Sheet for available slots</div>
+          <span class="node-tool">Google Sheets</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon purple">✅</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-purple">Confirm Booking</div>
+          <div class="node-title">Save booking & send confirmation</div>
+          <div class="node-desc">Saves to sheet & sends WhatsApp confirmation instantly</div>
+          <span class="node-tool">n8n + WhatsApp API</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon yellow">⏰</div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-yellow">Reminder</div>
+          <div class="node-title">Auto reminder 2 hours before</div>
+          <div class="node-desc">"Your table is ready at 7pm! See you soon 😊"</div>
+          <span class="node-tool">n8n Scheduler</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flow 2: Post Meal Feedback -->
+    <div class="flow-card">
+      <div class="flow-card-title">⭐ Post Meal Feedback Flow</div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon yellow">⏰</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-yellow">Trigger</div>
+          <div class="node-title">1 hour after meal time</div>
+          <div class="node-desc">Scheduled trigger fires after booking time ends</div>
+          <span class="node-tool">n8n Scheduler</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon green">💬</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-green">Send Message</div>
+          <div class="node-title">Send feedback request</div>
+          <div class="node-desc">"Hi! How was your experience? Rate us 1-5 ⭐"</div>
+          <span class="node-tool">WhatsApp API</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon orange">🤖</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-orange">AI Analysis</div>
+          <div class="node-title">AI reads & categorizes feedback</div>
+          <div class="node-desc">Detects positive, neutral, or negative sentiment</div>
+          <span class="node-tool">ChatGPT API</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon blue">📊</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-blue">Save Data</div>
+          <div class="node-title">Save feedback to dashboard</div>
+          <div class="node-desc">Stores rating + comment in Google Sheets</div>
+          <span class="node-tool">Google Sheets</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon purple">🌟</div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-purple">Review Request</div>
+          <div class="node-title">If 4-5 stars → ask Google review</div>
+          <div class="node-desc">Sends Google Maps review link to happy customers</div>
+          <span class="node-tool">n8n + WhatsApp API</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flow 3: Promo Broadcast -->
+    <div class="flow-card">
+      <div class="flow-card-title">📢 Promotional Broadcast Flow</div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon orange">🎯</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-orange">Trigger</div>
+          <div class="node-title">Owner clicks "Send Promo" button</div>
+          <div class="node-desc">Manual trigger or scheduled (e.g. every Friday)</div>
+          <span class="node-tool">n8n Webhook</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon blue">📋</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-blue">Fetch Customers</div>
+          <div class="node-title">Get all customer numbers</div>
+          <div class="node-desc">Pulls customer list from Google Sheets database</div>
+          <span class="node-tool">Google Sheets</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon purple">🤖</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-purple">AI Personalize</div>
+          <div class="node-title">AI creates personalized message</div>
+          <div class="node-desc">"Hi Ravi! 🎉 Special weekend offer just for you..."</div>
+          <span class="node-tool">ChatGPT API</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon green">📤</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-green">Broadcast</div>
+          <div class="node-title">Send to all customers</div>
+          <div class="node-desc">Sends personalized WhatsApp message to entire list</div>
+          <span class="node-tool">WhatsApp API + n8n Loop</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon yellow">📈</div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-yellow">Track</div>
+          <div class="node-title">Track responses & log results</div>
+          <div class="node-desc">Records who responded, clicked, or booked</div>
+          <span class="node-tool">Google Sheets</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end flows-grid -->
+</div>
+
+<!-- CLINIC FLOWS -->
+<div class="flow-container" id="clinic">
+  <div class="flow-title">🏥 Clinic WhatsApp Automation</div>
+  <div class="flow-sub">3 powerful automation flows to run your clinic on autopilot</div>
+
+  <div class="flows-grid">
+
+    <!-- Flow 1: Appointment Booking -->
+    <div class="flow-card">
+      <div class="flow-card-title">📅 Appointment Booking Flow</div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon green">💬</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-green">Trigger</div>
+          <div class="node-title">Patient sends WhatsApp message</div>
+          <div class="node-desc">"I need an appointment with Dr. Kumar tomorrow"</div>
+          <span class="node-tool">WhatsApp Business API</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon orange">🤖</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-orange">AI Processing</div>
+          <div class="node-title">AI extracts appointment info</div>
+          <div class="node-desc">Extracts doctor, date, time, patient name</div>
+          <span class="node-tool">ChatGPT API</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon blue">🔍</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-blue">Check Slots</div>
+          <div class="node-title">Check doctor availability</div>
+          <div class="node-desc">Checks available slots from appointment sheet</div>
+          <span class="node-tool">Google Sheets</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon purple">✅</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-purple">Confirm</div>
+          <div class="node-title">Book & send confirmation</div>
+          <div class="node-desc">"Your appointment is confirmed for tomorrow 10am ✅"</div>
+          <span class="node-tool">n8n + WhatsApp API</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon yellow">⏰</div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-yellow">Reminder</div>
+          <div class="node-title">Send reminder 1 day & 1 hour before</div>
+          <div class="node-desc">"Reminder: Your appointment is tomorrow at 10am 🏥"</div>
+          <span class="node-tool">n8n Scheduler</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flow 2: Post Visit Follow Up -->
+    <div class="flow-card">
+      <div class="flow-card-title">💊 Post Visit Follow-Up Flow</div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon yellow">⏰</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-yellow">Trigger</div>
+          <div class="node-title">24 hours after appointment</div>
+          <div class="node-desc">Scheduled trigger fires day after visit</div>
+          <span class="node-tool">n8n Scheduler</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon orange">🤖</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-orange">AI Message</div>
+          <div class="node-title">AI generates personalized follow-up</div>
+          <div class="node-desc">"Hi Priya! Hope you're feeling better. Take medicines on time 💊"</div>
+          <span class="node-tool">ChatGPT API</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon green">💬</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-green">Send Message</div>
+          <div class="node-title">Send follow-up on WhatsApp</div>
+          <div class="node-desc">Patient receives caring follow-up message automatically</div>
+          <span class="node-tool">WhatsApp API</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon blue">💬</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-blue">Collect Feedback</div>
+          <div class="node-title">Ask how patient is feeling</div>
+          <div class="node-desc">"How are you feeling today? Reply 1-Better 2-Same 3-Worse"</div>
+          <span class="node-tool">WhatsApp API</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon red">🚨</div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-red">Alert</div>
+          <div class="node-title">If worse → alert doctor immediately</div>
+          <div class="node-desc">Sends urgent notification to clinic staff</div>
+          <span class="node-tool">n8n + Email/SMS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flow 3: New Patient Enquiry -->
+    <div class="flow-card">
+      <div class="flow-card-title">🆕 New Patient Enquiry Flow</div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon green">💬</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-green">Trigger</div>
+          <div class="node-title">New patient messages clinic</div>
+          <div class="node-desc">"What are your consultation fees?" or "Is doctor available?"</div>
+          <span class="node-tool">WhatsApp Business API</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon orange">🤖</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-orange">AI Reply</div>
+          <div class="node-title">AI instantly answers query</div>
+          <div class="node-desc">Responds with fees, timings, doctor info automatically</div>
+          <span class="node-tool">ChatGPT API</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon blue">📋</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-blue">Capture Lead</div>
+          <div class="node-title">Save patient details</div>
+          <div class="node-desc">Name, number, query saved to Google Sheets</div>
+          <span class="node-tool">Google Sheets</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon purple">📅</div>
+          <div class="connector"></div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-purple">Book Appointment</div>
+          <div class="node-title">Offer to book appointment</div>
+          <div class="node-desc">"Would you like to book a slot? Reply YES to confirm"</div>
+          <span class="node-tool">WhatsApp API</span>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-left">
+          <div class="node-icon yellow">🔁</div>
+        </div>
+        <div class="node-body">
+          <div class="node-label label-yellow">Follow Up</div>
+          <div class="node-title">If no reply → follow up in 2 days</div>
+          <div class="node-desc">"Hi! Still interested in booking? We have slots available 😊"</div>
+          <span class="node-tool">n8n Scheduler</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-title">🔑 Tools Used in These Flows</div>
+  <div class="legend-grid">
+    <div class="legend-item"><div class="legend-dot green">💬</div> WhatsApp Business API — messaging</div>
+    <div class="legend-item"><div class="legend-dot orange">🤖</div> ChatGPT API — AI intelligence</div>
+    <div class="legend-item"><div class="legend-dot blue">📊</div> Google Sheets — free database</div>
+    <div class="legend-item"><div class="legend-dot purple">⚙️</div> n8n — automation backbone</div>
+    <div class="legend-item"><div class="legend-dot yellow">⏰</div> n8n Scheduler — triggers</div>
+    <div class="legend-item"><div class="legend-dot red">🚨</div> Email/SMS — emergency alerts</div>
+  </div>
+</div>
+
+<!-- N8N GUIDE -->
+<div class="n8n-guide">
+  <h3>⚡ How to Build This in n8n</h3>
+  <div class="steps-row">
+    <div class="step-item">
+      <div class="step-num">01</div>
+      <div class="step-text">Open n8n → Click "New Workflow"</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">02</div>
+      <div class="step-text">Add "Webhook" node as trigger</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">03</div>
+      <div class="step-text">Connect WhatsApp API node</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">04</div>
+      <div class="step-text">Add OpenAI node for AI replies</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">05</div>
+      <div class="step-text">Connect Google Sheets to save data</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">06</div>
+      <div class="step-text">Activate & test your flow! 🚀</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function switchTab(tab) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.flow-container').forEach(f => f.classList.remove('active'));
+    document.getElementById(tab).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
