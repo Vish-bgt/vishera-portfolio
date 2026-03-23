@@ -752,6 +752,30 @@
     <div class="projects-grid">
 
       <div class="project-card reveal">
+        <span class="project-badge">🍽️ Sample Project</span>
+        <div class="project-title">South Indian Restaurant Website</div>
+        <p class="project-desc">A fully designed restaurant website for CurryLeaf with menu, table booking form, WhatsApp ordering and AI automation showcase.</p>
+        <div class="project-tools">
+          <span class="tool-tag">HTML/CSS</span>
+          <span class="tool-tag">WhatsApp API</span>
+          <span class="tool-tag">AI Automation</span>
+        </div>
+        <a href="restaurant-sample.html" target="_blank" style="display:inline-block;margin-top:1.2rem;background:#FF4D00;color:white;padding:0.5rem 1.2rem;border-radius:100px;font-size:0.8rem;font-weight:600;text-decoration:none;">View Live Demo →</a>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-badge">🏥 Sample Project</span>
+        <div class="project-title">MediCare Clinic Website</div>
+        <p class="project-desc">A professional clinic website with doctor profiles, appointment booking, AI automation section and WhatsApp integration for instant booking.</p>
+        <div class="project-tools">
+          <span class="tool-tag">HTML/CSS</span>
+          <span class="tool-tag">WhatsApp API</span>
+          <span class="tool-tag">AI Automation</span>
+        </div>
+        <a href="clinic-sample.html" target="_blank" style="display:inline-block;margin-top:1.2rem;background:#0066FF;color:white;padding:0.5rem 1.2rem;border-radius:100px;font-size:0.8rem;font-weight:600;text-decoration:none;">View Live Demo →</a>
+      </div>
+
+      <div class="project-card reveal">
         <span class="project-badge">🔨 In Progress</span>
         <div class="project-title">Restaurant WhatsApp Booking Bot</div>
         <p class="project-desc">A fully automated WhatsApp bot for a local restaurant that handles table reservations, confirms bookings, and sends reminders — zero manual effort.</p>
@@ -801,8 +825,8 @@
 
     <div class="contact-wrapper reveal">
       <div class="contact-info">
-        <a href="mailto:vishwasuresh639@gmail.com" class="contact-item">
-          <span>✉️</span> vishwasuresh639@gmail.com
+        <a href="/cdn-cgi/l/email-protection#3f49564c57485e4c4a4d5a4c57090c067f58525e5653115c5052" class="contact-item">
+          <span>✉️</span> <span class="__cf_email__" data-cfemail="95e3fce6fde2f4e6e0e7f0e6fda3a6acd5f2f8f4fcf9bbf6faf8">[email&#160;protected]</span>
         </a>
         <a href="https://wa.me/919344381763" class="contact-item" target="_blank">
           <span>💬</span> +91 93443 81763
@@ -850,7 +874,7 @@
     <p>© 2025 <strong>VishEra</strong> · Built by <strong>Vishwa S</strong> · Powered by <span>AI</span></p>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
@@ -863,13 +887,4 @@
     reveals.forEach(el => observer.observe(el));
 
     // Form submit
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      document.getElementById('successMsg').style.display = 'block';
-      this.reset();
-      setTimeout(() => document.getElementById('successMsg').style.display = 'none', 5000);
-    });
-  </script>
-
-</body>
-</html>
+    document.getElementById('contactForm').addEventListener('submit', fu

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediCare Clinic | Your Health, Our Priority</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #0066FF;
+      --blue-light: #3385FF;
+      --blue-pale: #EEF4FF;
+      --teal: #00B4D8;
+      --teal-pale: #E0F7FA;
+      --green: #06D6A0;
+      --green-pale: #E8FDF7;
+      --red: #EF233C;
+      --ink: #0A1628;
+      --muted: #64748B;
+      --border: #E2EAF4;
+      --white: #FFFFFF;
+      --bg: #F4F8FF;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; }
+
+    body::before {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background-image: radial-gradient(circle, rgba(0,102,255,0.03) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none; z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 6%;
+      background: rgba(244,248,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 900; color: var(--blue); }
+    .nav-logo .cross { background: var(--blue); color: white; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 900; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-cta { background: var(--blue); color: white !important; padding: 0.6rem 1.4rem; border-radius: 100px; font-weight: 600 !important; transition: background 0.2s, transform 0.2s !important; box-shadow: 0 4px 15px rgba(0,102,255,0.3); }
+    .nav-cta:hover { background: #0052CC !important; transform: translateY(-1px); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 6% 4rem;
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #F4F8FF 0%, #EEF4FF 50%, #E8F4FD 100%);
+    }
+    .hero-blob { position: absolute; border-radius: 50%; filter: blur(70px); pointer-events: none; }
+    .hero-blob.b1 { width: 500px; height: 500px; background: rgba(0,102,255,0.08); top: -150px; right: -100px; animation: blob 9s ease-in-out infinite; }
+    .hero-blob.b2 { width: 350px; height: 350px; background: rgba(0,180,216,0.1); bottom: -50px; left: 5%; animation: blob 11s ease-in-out infinite reverse; }
+    .hero-blob.b3 { width: 250px; height: 250px; background: rgba(6,214,160,0.1); top: 40%; right: 35%; animation: blob 13s ease-in-out infinite; }
+    @keyframes blob { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(15px,-15px) scale(1.04);} 66%{transform:translate(-10px,10px) scale(0.96);} }
+
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; width: 100%; }
+
+    .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--blue-pale); color: var(--blue); border: 1px solid rgba(0,102,255,0.15); font-size: 0.75rem; font-weight: 700; padding: 0.4rem 1rem; border-radius: 100px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.2rem; animation: fadeUp 0.6s ease both; }
+    .hero-tag .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+    .hero h1 { font-family: 'Fraunces', serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 900; line-height: 1.1; color: var(--ink); margin-bottom: 1.2rem; animation: fadeUp 0.7s ease both; }
+    .hero h1 span { color: var(--blue); }
+    .hero h1 em { font-style: italic; color: var(--teal); }
+
+    .hero-desc { font-size: 1rem; color: var(--muted); line-height: 1.8; max-width: 460px; margin-bottom: 2rem; font-weight: 400; animation: fadeUp 0.8s ease both; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.9s ease both; }
+    .btn-blue { background: var(--blue); color: white; padding: 0.9rem 2rem; border-radius: 100px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(0,102,255,0.3); }
+    .btn-blue:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,102,255,0.4); }
+    .btn-outline { background: transparent; color: var(--blue); padding: 0.9rem 2rem; border-radius: 100px; font-weight: 600; font-size: 0.95rem; text-decoration: none; border: 2px solid var(--blue); transition: all 0.2s; }
+    .btn-outline:hover { background: var(--blue); color: white; transform: translateY(-2px); }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);} }
+
+    /* HERO VISUAL */
+    .hero-visual { position: relative; animation: fadeUp 0.8s ease 0.2s both; display: flex; justify-content: center; }
+    .hero-card-main {
+      background: white;
+      border-radius: 28px;
+      padding: 2rem;
+      box-shadow: 0 20px 60px rgba(0,102,255,0.12);
+      width: 340px;
+      position: relative;
+      border: 1px solid var(--border);
+    }
+    .doctor-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .doctor-avatar { width: 60px; height: 60px; background: linear-gradient(135deg, var(--blue), var(--teal)); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
+    .doctor-name { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .doctor-spec { font-size: 0.78rem; color: var(--muted); }
+    .doctor-avail { display: inline-flex; align-items: center; gap: 0.3rem; background: var(--green-pale); color: var(--green); font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.7rem; border-radius: 100px; margin-top: 0.3rem; }
+
+    .slots-title { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.8rem; }
+    .slots-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 1.5rem; }
+    .slot { background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 0.5rem; text-align: center; font-size: 0.75rem; font-weight: 600; color: var(--muted); cursor: pointer; transition: all 0.2s; }
+    .slot:hover, .slot.active { background: var(--blue); color: white; border-color: var(--blue); }
+    .slot.booked { background: var(--border); color: #aaa; cursor: not-allowed; text-decoration: line-through; }
+
+    .book-slot-btn { width: 100%; background: var(--blue); color: white; border: none; padding: 0.85rem; border-radius: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+    .book-slot-btn:hover { background: #0052CC; }
+
+    .float-card { position: absolute; background: white; border-radius: 16px; padding: 0.9rem 1.2rem; box-shadow: 0 8px 30px rgba(0,102,255,0.1); border: 1px solid var(--border); animation: float-card 4s ease-in-out infinite; }
+    .float-card.fc1 { top: -20px; right: -30px; animation-delay: 0s; }
+    .float-card.fc2 { bottom: 20px; left: -40px; animation-delay: 1.5s; }
+    @keyframes float-card { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+    .fc-icon { font-size: 1.3rem; margin-bottom: 0.2rem; }
+    .fc-val { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .fc-label { font-size: 0.68rem; color: var(--muted); }
+
+    .hero-stats { display: flex; gap: 2.5rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); animation: fadeUp 1s ease both; }
+    .stat-num { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 700; color: var(--blue); }
+    .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.1rem; }
+
+    /* SECTIONS */
+    section { padding: 6rem 6%; position: relative; z-index: 1; }
+    .section-tag { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+    .section-tag::before { content: ''; width: 20px; height: 2px; background: var(--blue); border-radius: 2px; }
+    .section-title { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; color: var(--ink); line-height: 1.15; margin-bottom: 0.8rem; }
+    .section-sub { font-size: 0.95rem; color: var(--muted); max-width: 480px; line-height: 1.8; }
+
+    /* SERVICES */
+    .services { background: white; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .services-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+
+    .service-card { background: var(--bg); border: 1px solid var(--border); border-radius: 20px; padding: 1.8rem; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,102,255,0.1); border-color: rgba(0,102,255,0.2); }
+    .service-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.2rem; }
+    .service-icon.blue { background: var(--blue-pale); }
+    .service-icon.teal { background: var(--teal-pale); }
+    .service-icon.green { background: var(--green-pale); }
+    .service-title { font-weight: 700; font-size: 1rem; color: var(--ink); margin-bottom: 0.5rem; }
+    .service-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+    .service-link { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--blue); font-size: 0.8rem; font-weight: 600; text-decoration: none; margin-top: 1rem; transition: gap 0.2s; }
+    .service-link:hover { gap: 0.6rem; }
+
+    /* DOCTORS */
+    .doctors { background: var(--bg); }
+    .doctors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+
+    .doctor-card { background: white; border: 1px solid var(--border); border-radius: 24px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+    .doctor-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,102,255,0.1); }
+    .doctor-img { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 5rem; position: relative; }
+    .doctor-img.blue { background: linear-gradient(135deg, #DBEAFE, #BFDBFE); }
+    .doctor-img.teal { background: linear-gradient(135deg, #CFFAFE, #A5F3FC); }
+    .doctor-img.green { background: linear-gradient(135deg, #DCFCE7, #BBF7D0); }
+    .doctor-img.purple { background: linear-gradient(135deg, #EDE9FE, #DDD6FE); }
+    .avail-badge { position: absolute; bottom: 12px; right: 12px; background: white; border-radius: 100px; padding: 0.25rem 0.7rem; font-size: 0.68rem; font-weight: 700; color: var(--green); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+    .doctor-body { padding: 1.2rem; }
+    .doctor-name { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.2rem; }
+    .doctor-spec { font-size: 0.78rem; color: var(--blue); font-weight: 600; margin-bottom: 0.5rem; }
+    .doctor-exp { font-size: 0.75rem; color: var(--muted); margin-bottom: 1rem; }
+    .doctor-btn { width: 100%; background: var(--blue-pale); color: var(--blue); border: none; padding: 0.6rem; border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: background 0.2s, color 0.2s; }
+    .doctor-btn:hover { background: var(--blue); color: white; }
+
+    /* AI AUTOMATION SECTION */
+    .ai-section { background: linear-gradient(135deg, #0A1628, #0D2148); color: white; }
+    .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 3rem; }
+    .ai-text .section-tag { color: var(--teal); }
+    .ai-text .section-tag::before { background: var(--teal); }
+    .ai-text .section-title { color: white; }
+    .ai-text .section-sub { color: rgba(255,255,255,0.6); }
+
+    .ai-features { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+    .ai-feature { display: flex; align-items: flex-start; gap: 1rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.2rem; transition: background 0.2s; }
+    .ai-feature:hover { background: rgba(0,102,255,0.15); }
+    .ai-feature-icon { width: 40px; height: 40px; background: rgba(0,102,255,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .ai-feature-title { font-weight: 700; color: white; font-size: 0.9rem; margin-bottom: 0.2rem; }
+    .ai-feature-desc { font-size: 0.78rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+    .ai-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .ai-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 1.5rem; transition: all 0.3s; }
+    .ai-card:hover { background: rgba(0,102,255,0.2); border-color: rgba(0,102,255,0.3); transform: translateY(-4px); }
+    .ai-card.span2 { grid-column: span 2; }
+    .ai-card-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+    .ai-card-title { font-weight: 700; color: white; font-size: 0.9rem; margin-bottom: 0.3rem; }
+    .ai-card-desc { font-size: 0.75rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+    /* APPOINTMENT */
+    .appointment { background: white; border-top: 1px solid var(--border); }
+    .appt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 3rem; }
+
+    .appt-info h3 { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700; color: var(--ink); margin-bottom: 1.5rem; }
+    .info-list { display: flex; flex-direction: column; gap: 1rem; }
+    .info-row { display: flex; align-items: center; gap: 1rem; }
+    .info-icon { width: 44px; height: 44px; background: var(--blue-pale); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .info-label { font-size: 0.72rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .info-value { font-size: 0.9rem; font-weight: 600; color: var(--ink); }
+
+    .appt-form { background: var(--bg); border: 1px solid var(--border); border-radius: 24px; padding: 2.5rem; }
+    .appt-form h3 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 700; color: var(--ink); margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--muted); margin-bottom: 0.4rem; letter-spacing: 0.03em; text-transform: uppercase; }
+    input, select, textarea { width: 100%; padding: 0.8rem 1rem; border: 1.5px solid var(--border); border-radius: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem; color: var(--ink); background: white; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    input:focus, select:focus, textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,102,255,0.08); }
+    textarea { resize: vertical; min-height: 90px; }
+    .form-submit { width: 100%; background: var(--blue); color: white; border: none; padding: 1rem; border-radius: 100px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(0,102,255,0.3); margin-top: 0.5rem; }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,102,255,0.4); }
+    .success-msg { display: none; text-align: center; padding: 1rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; color: #16a34a; font-weight: 500; margin-top: 1rem; font-size: 0.88rem; }
+
+    /* WHATSAPP BANNER */
+    .wa-banner { background: linear-gradient(135deg, var(--teal), var(--blue)); padding: 3rem 6%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; position: relative; z-index: 1; }
+    .wa-text h3 { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 0.3rem; }
+    .wa-text p { font-size: 0.9rem; color: rgba(255,255,255,0.85); }
+    .wa-btn { background: white; color: var(--blue); padding: 0.9rem 2rem; border-radius: 100px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 0.6rem; }
+    .wa-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+
+    /* FOOTER */
+    footer { background: var(--ink); color: rgba(255,255,255,0.5); padding: 2.5rem 6%; position: relative; z-index: 1; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 2rem; }
+    .footer-brand p { font-size: 0.83rem; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 280px; margin-top: 0.8rem; }
+    .footer-col h4 { font-size: 0.78rem; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-col ul a { font-size: 0.82rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--blue); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: 0.8rem; }
+    .powered { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+    .powered span { color: var(--teal); }
+
+    /* WHATSAPP FLOAT */
+    .wa-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; background: #25D366; color: white; width: 58px; height: 58px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform 0.2s; animation: pulse-wa 2s infinite; }
+    .wa-float:hover { transform: scale(1.1); }
+    @keyframes pulse-wa { 0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.4);} 50%{box-shadow:0 4px 30px rgba(37,211,102,0.7);} }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-card-main { width: 100%; }
+      .ai-grid, .appt-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .ai-visual { display: none; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="https://wa.me/919344381763" target="_blank" class="wa-float">💬</a>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo"><div class="cross">+</div> MediCare</div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#doctors">Doctors</a></li>
+      <li><a href="#appointment">Appointment</a></li>
+      <li><a href="#appointment" class="nav-cta">Book Now</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-blob b1"></div>
+    <div class="hero-blob b2"></div>
+    <div class="hero-blob b3"></div>
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-tag"><span class="dot"></span> Now Accepting Patients</div>
+        <h1>Your Health is Our <span>Top</span> <em>Priority</em></h1>
+        <p class="hero-desc">Experience world-class healthcare with compassionate doctors, instant appointment booking, and AI-powered follow-up care — all just a WhatsApp message away.</p>
+        <div class="hero-actions">
+          <a href="#appointment" class="btn-blue">Book Appointment</a>
+          <a href="#services" class="btn-outline">Our Services</a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stat-num">15+</div><div class="stat-label">Expert Doctors</div></div>
+          <div><div class="stat-num">50K+</div><div class="stat-label">Patients Treated</div></div>
+          <div><div class="stat-num">4.9★</div><div class="stat-label">Patient Rating</div></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card-main">
+          <div class="doctor-header">
+            <div class="doctor-avatar">👨‍⚕️</div>
+            <div>
+              <div class="doctor-name">Dr. Arvind Kumar</div>
+              <div class="doctor-spec">General Physician · MBBS, MD</div>
+              <div class="doctor-avail">● Available Today</div>
+            </div>
+          </div>
+          <div class="slots-title">Available Slots — Today</div>
+          <div class="slots-grid">
+            <div class="slot booked">9:00 AM</div>
+            <div class="slot booked">9:30 AM</div>
+            <div class="slot active">10:00 AM</div>
+            <div class="slot">10:30 AM</div>
+            <div class="slot">11:00 AM</div>
+            <div class="slot booked">11:30 AM</div>
+          </div>
+          <button class="book-slot-btn">Confirm Appointment →</button>
+          <div class="float-card fc1">
+            <div class="fc-icon">🤖</div>
+            <div class="fc-val">AI Reminder</div>
+            <div class="fc-label">Sent via WhatsApp</div>
+          </div>
+          <div class="float-card fc2">
+            <div class="fc-icon">✅</div>
+            <div class="fc-val">Zero Wait</div>
+            <div class="fc-label">Pre-booked slots</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-header">
+      <div>
+        <div class="section-tag">What We Offer</div>
+        <h2 class="section-title">Comprehensive care<br/>under one roof 🏥</h2>
+      </div>
+      <p class="section-sub">From routine checkups to specialized treatments — we provide end-to-end healthcare with compassion and precision.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon blue">🩺</div>
+        <div class="service-title">General Consultation</div>
+        <p class="service-desc">Expert diagnosis and treatment for common illnesses, chronic conditions, and preventive healthcare needs.</p>
+        <a href="#appointment" class="service-link">Book Now →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon teal">🧪</div>
+        <div class="service-title">Lab Diagnostics</div>
+        <p class="service-desc">Full-panel blood tests, urine analysis, and advanced diagnostics with results delivered to your WhatsApp.</p>
+        <a href="#appointment" class="service-link">Book Now →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon green">❤️</div>
+        <div class="service-title">Cardiology</div>
+        <p class="service-desc">ECG, echo, stress tests and expert cardiac consultations for heart health monitoring and treatment.</p>
+        <a href="#appointment" class="service-link">Book Now →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon blue">🦷</div>
+        <div class="service-title">Dental Care</div>
+        <p class="service-desc">Routine cleaning, fillings, root canals and cosmetic dentistry by experienced dental surgeons.</p>
+        <a href="#appointment" class="service-link">Book Now →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon teal">👶</div>
+        <div class="service-title">Pediatrics</div>
+        <p class="service-desc">Specialized child healthcare, vaccinations, growth monitoring and nutrition counseling for children.</p>
+        <a href="#appointment" class="service-link">Book Now →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon green">🧠</div>
+        <div class="service-title">Mental Wellness</div>
+        <p class="service-desc">Confidential counseling, stress management and mental health support by certified psychologists.</p>
+        <a href="#appointment" class="service-link">Book Now →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCTORS -->
+  <section class="doctors" id="doctors">
+    <div class="section-tag">Our Team</div>
+    <h2 class="section-title">Meet our expert<br/>doctors 👨‍⚕️</h2>
+    <p class="section-sub">Our team of highly qualified specialists is committed to delivering compassionate, evidence-based care.</p>
+    <div class="doctors-grid">
+      <div class="doctor-card">
+        <div class="doctor-img blue">👨‍⚕️<span class="avail-badge">● Available</span></div>
+        <div class="doctor-body">
+          <div class="doctor-name">Dr. Arvind Kumar</div>
+          <div class="doctor-spec">General Physician</div>
+          <div class="doctor-exp">MBBS, MD · 12 Years Experience</div>
+          <button class="doctor-btn">Book Appointment</button>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-img teal">👩‍⚕️<span class="avail-badge">● Available</span></div>
+        <div class="doctor-body">
+          <div class="doctor-name">Dr. Priya Sharma</div>
+          <div class="doctor-spec">Cardiologist</div>
+          <div class="doctor-exp">MBBS, DM Cardiology · 15 Years</div>
+          <button class="doctor-btn">Book Appointment</button>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-img green">👨‍⚕️<span class="avail-badge" style="color:#FFB300;">● Tomorrow</span></div>
+        <div class="doctor-body">
+          <div class="doctor-name">Dr. Rajan Nair</div>
+          <div class="doctor-spec">Pediatrician</div>
+          <div class="doctor-exp">MBBS, DCH · 10 Years Experience</div>
+          <button class="doctor-btn">Book Appointment</button>
+        </div>
+      </div>
+      <div class="doctor-card">
+        <div class="doctor-img purple">👩‍⚕️<span class="avail-badge">● Available</span></div>
+        <div class="doctor-body">
+          <div class="doctor-name">Dr. Meena Iyer</div>
+          <div class="doctor-spec">Psychologist</div>
+          <div class="doctor-exp">MSc Psychology, PhD · 8 Years</div>
+          <button class="doctor-btn">Book Appointment</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI SECTION -->
+  <section class="ai-section">
+    <div class="ai-grid">
+      <div class="ai-text">
+        <div class="section-tag">Smart Healthcare</div>
+        <h2 class="section-title">AI-powered care<br/>that never sleeps 🤖</h2>
+        <p class="section-sub" style="color:rgba(255,255,255,0.6)">Our clinic uses cutting-edge AI automation to ensure you never miss an appointment, always receive follow-up care, and get answers instantly — 24/7.</p>
+        <div class="ai-features">
+          <div class="ai-feature">
+            <div class="ai-feature-icon">💬</div>
+            <div><div class="ai-feature-title">WhatsApp Appointment Booking</div><div class="ai-feature-desc">Book, reschedule or cancel appointments instantly via WhatsApp — no calling needed</div></div>
+          </div>
+          <div class="ai-feature">
+            <div class="ai-feature-icon">⏰</div>
+            <div><div class="ai-feature-title">Automatic Reminders</div><div class="ai-feature-desc">Get reminder 1 day and 1 hour before your appointment — so you never forget</div></div>
+          </div>
+          <div class="ai-feature">
+            <div class="ai-feature-icon">💊</div>
+            <div><div class="ai-feature-title">Post-Visit Follow Up</div><div class="ai-feature-desc">Receive medication reminders and doctor follow-up messages automatically after every visit</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="ai-visual">
+        <div class="ai-card">
+          <div class="ai-card-icon">📅</div>
+          <div class="ai-card-title">Auto Booking</div>
+          <div class="ai-card-desc">Instant confirmation via WhatsApp</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-icon">🔔</div>
+          <div class="ai-card-title">Smart Reminders</div>
+          <div class="ai-card-desc">Never miss an appointment again</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-icon">💬</div>
+          <div class="ai-card-title">24/7 AI Chat</div>
+          <div class="ai-card-desc">Answers queries round the clock</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-icon">📊</div>
+          <div class="ai-card-title">Health Reports</div>
+          <div class="ai-card-desc">Reports delivered to WhatsApp</div>
+        </div>
+        <div class="ai-card span2">
+          <div class="ai-card-icon">❤️</div>
+          <div class="ai-card-title">Post-Visit Care Automation</div>
+          <div class="ai-card-desc">Follow-up messages, medication reminders and health tips sent automatically after every visit</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPOINTMENT -->
+  <section class="appointment" id="appointment">
+    <div class="appt-grid">
+      <div class="appt-info">
+        <div class="section-tag">Book Appointment</div>
+        <h2 class="section-title">Your health can't<br/>wait — Book now 📅</h2>
+        <p class="section-sub">Fill the form or message us on WhatsApp. Our AI assistant will confirm your slot instantly.</p>
+        <div class="info-list" style="margin-top:2rem;">
+          <div class="info-row">
+            <div class="info-icon">📍</div>
+            <div><div class="info-label">Location</div><div class="info-value">15, Gandhi Nagar, Anna Nagar West, Chennai - 600040</div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">🕐</div>
+            <div><div class="info-label">Clinic Hours</div><div class="info-value">Mon–Sat: 8:00 AM – 9:00 PM · Sun: 9:00 AM – 2:00 PM</div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📞</div>
+            <div><div class="info-label">Phone</div><div class="info-value">+91 93443 81763</div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">🚨</div>
+            <div><div class="info-label">Emergency</div><div class="info-value">24/7 Emergency Helpline Available</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="appt-form">
+        <h3>📋 Book Your Appointment</h3>
+        <form id="apptForm">
+          <div class="form-row">
+            <div class="form-group"><label>Patient Name</label><input type="text" placeholder="Ravi Kumar" required/></div>
+            <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+91 98765 43210" required/></div>
+          </div>
+          <div class="form-group">
+            <label>Select Doctor</label>
+            <select>
+              <option>Dr. Arvind Kumar — General Physician</option>
+              <option>Dr. Priya Sharma — Cardiologist</option>
+              <option>Dr. Rajan Nair — Pediatrician</option>
+              <option>Dr. Meena Iyer — Psychologist</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Preferred Date</label><input type="date" required/></div>
+            <div class="form-group"><label>Preferred Time</label><input type="time" required/></div>
+          </div>
+          <div class="form-group"><label>Symptoms / Reason</label><textarea placeholder="Briefly describe your symptoms or reason for visit..."></textarea></div>
+          <button type="submit" class="form-submit">Book Appointment 🏥</button>
+          <div class="success-msg" id="apptSuccess">✅ Appointment booked! You'll receive a WhatsApp confirmation shortly.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHATSAPP BANNER -->
+  <div class="wa-banner">
+    <div class="wa-text">
+      <h3>💬 Book Instantly on WhatsApp</h3>
+      <p>Our AI assistant confirms your appointment in seconds — no waiting, no calling!</p>
+    </div>
+    <a href="https://wa.me/919344381763" target="_blank" class="wa-btn">Chat on WhatsApp →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:0.6rem;font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--blue);">
+          <div style="background:var(--blue);color:white;width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;">+</div> MediCare
+        </div>
+        <p>Compassionate healthcare powered by cutting-edge AI automation. Your health, our mission — always.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">General Consultation</a></li>
+          <li><a href="#">Lab Diagnostics</a></li>
+          <li><a href="#">Cardiology</a></li>
+          <li><a href="#">Pediatrics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">📍 Anna Nagar, Chennai</a></li>
+          <li><a href="#">📞 +91 93443 81763</a></li>
+          <li><a href="#">✉️ care@medicare.in</a></li>
+          <li><a href="#">💬 WhatsApp Booking</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 <strong style="color:white;">MediCare Clinic</strong> · All rights reserved</p>
+      <p class="powered">Powered by <span>VishEra AI Automation</span></p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('apptForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('apptSuccess').style.display = 'block';
+      this.reset();
+      setTimeout(() => document.getElementById('apptSuccess').style.display = 'none', 5000);
+    });
+
+    document.querySelectorAll('.doctor-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.textContent = '✓ Booking...';
+        this.style.background = 'var(--blue)';
+        this.style.color = 'white';
+        setTimeout(() => { this.textContent = 'Book Appointment'; this.style.background = ''; this.style.color = ''; }, 2000);
+      });
+    });
+
+    document.querySelectorAll('.slot:not(.booked)').forEach(slot => {
+      slot.addEventListener('click', function() {
+        document.querySelectorAll('.slot').forEach(s => s.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
