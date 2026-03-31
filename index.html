@@ -3,52 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>VishEra | AI Automation Agency for Restaurants & Clinics in Chennai</title>
-
-  <!-- ✅ Google Search Console Verification -->
-  <meta name="google-site-verification" content="u7FS31a53hgkz9IIkAQnW33xPHlh_Au47CDh5QtPEv0" />
-
-  <!-- ✅ SEO Meta Tags -->
-  <meta name="description" content="VishEra is a Chennai-based AI Automation Agency helping restaurants and clinics save time and grow revenue with WhatsApp chatbots, appointment automation, and custom AI workflows."/>
-  <meta name="keywords" content="VishEra, VishEra portfolio, AI automation agency Chennai, WhatsApp chatbot Chennai, restaurant automation, clinic automation, Vishwa AI agency, AI automation India"/>
-  <meta name="author" content="Vishwa S"/>
-  <meta name="robots" content="index, follow"/>
-  <link rel="canonical" href="https://vish-bgt.github.io/vishera-portfolio/"/>
-
-  <!-- ✅ Open Graph (shows preview on WhatsApp, LinkedIn, Facebook) -->
-  <meta property="og:type" content="website"/>
-  <meta property="og:title" content="VishEra | AI Automation Agency for Restaurants & Clinics"/>
-  <meta property="og:description" content="VishEra helps restaurants and clinics run on autopilot with AI automation. Based in Chennai. Book a free consultation today."/>
-  <meta property="og:url" content="https://vish-bgt.github.io/vishera-portfolio/"/>
-  <meta property="og:site_name" content="VishEra"/>
-  <meta property="og:locale" content="en_IN"/>
-
-  <!-- ✅ Twitter Card -->
-  <meta name="twitter:card" content="summary"/>
-  <meta name="twitter:title" content="VishEra | AI Automation Agency"/>
-  <meta name="twitter:description" content="AI automation for restaurants and clinics in Chennai. WhatsApp chatbots, appointment reminders, lead follow-up — all on autopilot."/>
-
-  <!-- ✅ Schema.org Structured Data (helps Google understand your business) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "VishEra",
-    "description": "AI Automation Agency helping restaurants and clinics in Chennai automate their business with WhatsApp chatbots, appointment systems, and custom AI workflows.",
-    "url": "https://vish-bgt.github.io/vishera-portfolio/",
-    "founder": {
-      "@type": "Person",
-      "name": "Vishwa S"
-    },
-    "areaServed": {
-      "@type": "City",
-      "name": "Chennai"
-    },
-    "serviceType": ["AI Automation", "WhatsApp Chatbot", "Appointment Automation", "Lead Follow-Up System"],
-    "knowsAbout": ["Artificial Intelligence", "Automation", "Restaurant Technology", "Healthcare Technology"]
-  }
-  </script>
-
+  <title>VishEra | AI Automation Agency</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -146,7 +101,7 @@
     .project-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
     .project-tools { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 1.2rem; }
     .tool-tag { background: var(--ink); color: #fff; font-size: 0.7rem; padding: 0.25rem 0.7rem; border-radius: 100px; font-weight: 500; }
-    .project-btn { display: inline-block; margin-top: 1.2rem; color: white; padding: 0.5rem 1.2rem; border-radius: 100px; font-size: 0.8rem; font-weight: 600; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
+    .project-btn { display: inline-block; margin-top: 1.2rem; color: white; padding: 0.5rem 1.2rem; border-radius: 100px; font-size: 0.8rem; font-weight: 600; text-decoration: none; transition: opacity 0.2s, transform 0.2s; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; }
     .project-btn:hover { opacity: 0.85; transform: translateY(-2px); }
     .project-btn.orange { background: var(--accent); }
     .project-btn.blue { background: #0066FF; }
@@ -172,13 +127,217 @@
     footer strong { color: #fff; }
     footer span { color: var(--accent); }
 
+    /* ===================== MODAL SYSTEM ===================== */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(6px);
+      justify-content: center; align-items: flex-start;
+      overflow-y: auto; padding: 2rem 1rem;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-box {
+      background: #fff; border-radius: 24px; width: 100%; max-width: 900px;
+      margin: auto; overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+      animation: modalIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes modalIn { from { opacity: 0; transform: scale(0.92) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    .modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 2rem; border-bottom: 1px solid #f0f0f0;
+    }
+    .modal-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--ink); }
+    .modal-close {
+      background: #f5f5f5; border: none; width: 36px; height: 36px; border-radius: 50%;
+      cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s; color: var(--ink);
+    }
+    .modal-close:hover { background: #ffe0d6; color: var(--accent); }
+    .modal-body { padding: 2rem; }
+    .modal-tabs { display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .modal-tab {
+      padding: 0.5rem 1.2rem; border-radius: 100px; border: 1.5px solid var(--border);
+      background: #fff; font-size: 0.82rem; font-weight: 600; cursor: pointer;
+      transition: all 0.2s; color: var(--muted); font-family: 'DM Sans', sans-serif;
+    }
+    .modal-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .modal-tab-content { display: none; }
+    .modal-tab-content.active { display: block; }
+
+    /* ===================== RESTAURANT DEMO ===================== */
+    .rest-hero {
+      background: linear-gradient(135deg, #1a0a00 0%, #3d1505 50%, #1a0a00 100%);
+      border-radius: 16px; padding: 3rem 2rem; text-align: center; color: white; margin-bottom: 1.5rem;
+      position: relative; overflow: hidden;
+    }
+    .rest-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FF4D00' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .rest-logo-tag { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: #FF6B2B; margin-bottom: 0.5rem; }
+    .rest-name { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .rest-tagline { color: rgba(255,255,255,0.6); font-size: 0.95rem; margin-bottom: 1.5rem; }
+    .rest-nav { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .rest-nav-btn {
+      padding: 0.5rem 1.2rem; border-radius: 100px; font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+    }
+    .rest-nav-btn.active, .rest-nav-btn:hover { background: var(--accent); color: white; }
+    .rest-nav-btn:not(.active) { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+
+    .rest-section { display: none; }
+    .rest-section.active { display: block; }
+
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .menu-item { background: var(--cream); border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem; position: relative; }
+    .menu-item-emoji { font-size: 2rem; margin-bottom: 0.5rem; }
+    .menu-item-name { font-weight: 600; font-size: 0.9rem; color: var(--ink); margin-bottom: 0.2rem; }
+    .menu-item-desc { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.8rem; }
+    .menu-item-price { font-family: 'Syne', sans-serif; font-weight: 800; color: var(--accent); font-size: 1rem; }
+    .menu-veg { position: absolute; top: 1rem; right: 1rem; width: 14px; height: 14px; border: 2px solid #16a34a; border-radius: 3px; display: flex; align-items: center; justify-content: center; }
+    .menu-veg::after { content: ''; width: 6px; height: 6px; background: #16a34a; border-radius: 50%; }
+
+    .booking-form-demo { background: var(--cream); border-radius: 16px; padding: 2rem; margin-top: 1rem; }
+    .booking-form-demo h4 { font-family: 'Syne', sans-serif; font-weight: 700; margin-bottom: 1.5rem; color: var(--ink); }
+    .demo-input { width: 100%; padding: 0.7rem 1rem; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; background: white; margin-bottom: 0.8rem; color: var(--ink); outline: none; }
+    .demo-input:focus { border-color: var(--accent); }
+    .demo-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .demo-btn { background: var(--accent); color: white; border: none; padding: 0.8rem 2rem; border-radius: 100px; font-weight: 600; font-size: 0.9rem; cursor: pointer; width: 100%; font-family: 'DM Sans', sans-serif; transition: transform 0.2s; }
+    .demo-btn:hover { transform: translateY(-2px); }
+    .wa-msg-box { background: #e8f5e9; border-radius: 14px; padding: 1.2rem; margin-top: 1rem; display: none; border-left: 4px solid #25D366; }
+    .wa-msg-box.show { display: block; }
+    .wa-msg-box h5 { color: #1a7a1a; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem; }
+    .wa-msg-box p { font-size: 0.82rem; color: #2d6a2d; line-height: 1.6; white-space: pre-line; }
+    .wa-icon { font-size: 1rem; }
+
+    .chatbot-window { background: #ece5dd; border-radius: 16px; overflow: hidden; margin-top: 1rem; }
+    .chatbot-header { background: #075e54; color: white; padding: 1rem 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+    .chat-avatar { width: 38px; height: 38px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .chat-name { font-weight: 600; font-size: 0.9rem; }
+    .chat-status { font-size: 0.72rem; opacity: 0.7; }
+    .chat-messages { padding: 1rem; min-height: 220px; display: flex; flex-direction: column; gap: 0.7rem; }
+    .chat-msg { max-width: 78%; padding: 0.7rem 1rem; border-radius: 12px; font-size: 0.83rem; line-height: 1.5; }
+    .chat-msg.bot { background: white; align-self: flex-start; border-radius: 0 12px 12px 12px; }
+    .chat-msg.user { background: #dcf8c6; align-self: flex-end; border-radius: 12px 0 12px 12px; }
+    .chat-msg.typing { background: white; align-self: flex-start; font-style: italic; color: #999; }
+    .chat-input-row { display: flex; gap: 0.5rem; padding: 0.8rem; background: #f0f0f0; }
+    .chat-input { flex: 1; padding: 0.6rem 1rem; border-radius: 100px; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; outline: none; }
+    .chat-send { background: #25D366; color: white; border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1rem; cursor: pointer; flex-shrink: 0; }
+
+    /* ===================== CLINIC DEMO ===================== */
+    .clinic-hero {
+      background: linear-gradient(135deg, #001f3f 0%, #0a4080 50%, #001f3f 100%);
+      border-radius: 16px; padding: 3rem 2rem; text-align: center; color: white; margin-bottom: 1.5rem;
+    }
+    .clinic-badge { display: inline-block; background: rgba(255,255,255,0.15); padding: 0.3rem 1rem; border-radius: 100px; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.7rem; }
+    .clinic-name { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .clinic-tagline { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .clinic-nav { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .clinic-nav-btn {
+      padding: 0.5rem 1.2rem; border-radius: 100px; font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+    }
+    .clinic-nav-btn.active, .clinic-nav-btn:hover { background: #0066FF; color: white; }
+    .clinic-nav-btn:not(.active) { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+
+    .clinic-section { display: none; }
+    .clinic-section.active { display: block; }
+
+    .doctor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .doctor-card { background: #fff; border: 1px solid #e0eaf8; border-radius: 14px; padding: 1.5rem; text-align: center; }
+    .doctor-avatar { width: 60px; height: 60px; background: linear-gradient(135deg, #0066FF, #00b4d8); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 0.8rem; }
+    .doctor-name { font-weight: 700; font-size: 0.9rem; color: var(--ink); margin-bottom: 0.2rem; }
+    .doctor-spec { font-size: 0.75rem; color: #0066FF; font-weight: 600; margin-bottom: 0.5rem; }
+    .doctor-exp { font-size: 0.72rem; color: var(--muted); }
+    .doctor-slots { display: flex; gap: 0.3rem; flex-wrap: wrap; margin-top: 0.8rem; justify-content: center; }
+    .slot-pill { background: #eef4ff; color: #0066FF; font-size: 0.68rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 100px; }
+
+    .appt-confirm-box { background: #eef4ff; border-left: 4px solid #0066FF; border-radius: 14px; padding: 1.2rem; display: none; margin-top: 1rem; }
+    .appt-confirm-box.show { display: block; }
+    .appt-confirm-box h5 { color: #0044cc; font-size: 0.82rem; margin-bottom: 0.5rem; }
+    .appt-confirm-box p { font-size: 0.82rem; color: #003399; line-height: 1.6; white-space: pre-line; }
+
+    /* ===================== AUTOMATION FLOW ===================== */
+    .flow-container { padding: 0.5rem 0; }
+    .flow-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--ink); margin-bottom: 1.5rem; }
+    .flow-diagram { position: relative; }
+    .flow-nodes { display: flex; flex-direction: column; gap: 0; }
+    .flow-node {
+      display: flex; align-items: flex-start; gap: 1rem; position: relative; padding-bottom: 0;
+    }
+    .flow-node-left { display: flex; flex-direction: column; align-items: center; }
+    .flow-dot {
+      width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center;
+      justify-content: center; font-size: 1.2rem; flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .flow-line {
+      width: 2px; flex: 1; min-height: 24px; margin: 4px 0;
+    }
+    .flow-node-body { flex: 1; padding-bottom: 1.5rem; }
+    .flow-node-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.2rem; }
+    .flow-node-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--ink); margin-bottom: 0.3rem; }
+    .flow-node-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+    .flow-node-tools { display: flex; gap: 0.3rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .flow-tool { font-size: 0.68rem; padding: 0.2rem 0.6rem; border-radius: 100px; font-weight: 600; }
+
+    /* Trigger */
+    .nd-trigger .flow-dot { background: #fff3e0; }
+    .nd-trigger .flow-line { background: linear-gradient(to bottom, #ff9800, #ff6f00); }
+    .nd-trigger .flow-node-label { color: #ff6f00; }
+    .nd-trigger .flow-tool { background: #fff3e0; color: #e65100; }
+
+    /* AI */
+    .nd-ai .flow-dot { background: #f3e5ff; }
+    .nd-ai .flow-line { background: linear-gradient(to bottom, #9c27b0, #7b1fa2); }
+    .nd-ai .flow-node-label { color: #7b1fa2; }
+    .nd-ai .flow-tool { background: #f3e5ff; color: #6a1b9a; }
+
+    /* Action */
+    .nd-action .flow-dot { background: #e3f2fd; }
+    .nd-action .flow-line { background: linear-gradient(to bottom, #1976d2, #0d47a1); }
+    .nd-action .flow-node-label { color: #1565c0; }
+    .nd-action .flow-tool { background: #e3f2fd; color: #0d47a1; }
+
+    /* Condition */
+    .nd-condition .flow-dot { background: #fff8e1; }
+    .nd-condition .flow-line { background: linear-gradient(to bottom, #fbc02d, #f57f17); }
+    .nd-condition .flow-node-label { color: #f57f17; }
+    .nd-condition .flow-tool { background: #fff8e1; color: #e65100; }
+
+    /* Output */
+    .nd-output .flow-dot { background: #e8f5e9; }
+    .nd-output .flow-line { background: linear-gradient(to bottom, #388e3c, #1b5e20); }
+    .nd-output .flow-node-label { color: #2e7d32; }
+    .nd-output .flow-tool { background: #e8f5e9; color: #1b5e20; }
+
+    /* End */
+    .nd-end .flow-dot { background: #fce4ec; }
+    .nd-end .flow-node-label { color: #c62828; }
+    .nd-end .flow-tool { background: #fce4ec; color: #b71c1c; }
+
+    .flow-branch {
+      background: var(--cream); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1rem 1.2rem; margin: 0.5rem 0 1.2rem 3.4rem; font-size: 0.8rem;
+    }
+    .flow-branch-title { font-weight: 700; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+    .flow-branch-item { display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.3rem; color: var(--ink-light); line-height: 1.4; }
+    .flow-branch-item::before { content: '→'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+    .flow-legend { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; font-weight: 600; color: var(--muted); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .hero { padding: 7rem 5% 3rem; }
       .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .form-row { grid-template-columns: 1fr; }
+      .form-row, .demo-row { grid-template-columns: 1fr; }
       .contact-wrapper { padding: 2rem; }
+      .modal-box { border-radius: 16px; }
+      .modal-body { padding: 1.2rem; }
+      .rest-name, .clinic-name { font-size: 1.8rem; }
+      .menu-grid, .doctor-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -202,7 +361,7 @@
     <div class="hero-content">
       <div class="hero-tag">AI Automation Agency</div>
       <h1>Automate Your<br/>Business with <em>AI</em></h1>
-      <p class="hero-desc">VishEra helps restaurants and clinics run on autopilot — saving time, reducing manual work, and growing revenue using cutting-edge AI automation.</p>
+      <p class="hero-desc">VishEra helps restaurants and clinics run on autopilot &#8212; saving time, reducing manual work, and growing revenue using cutting-edge AI automation.</p>
       <div class="hero-actions">
         <a href="#services" class="btn-primary">Explore Services</a>
         <a href="#contact" class="btn-secondary">Book a Free Call</a>
@@ -239,10 +398,10 @@
         </div>
       </div>
       <div class="about-text">
-        <h3>AI isn't the future.<br/>It's already here.</h3>
-        <p>I'm Vishwa, founder of VishEra — an AI automation agency focused on helping small businesses in the restaurant and healthcare space eliminate repetitive tasks and focus on what matters most: their customers.</p>
+        <h3>AI isn&#8217;t the future.<br/>It&#8217;s already here.</h3>
+        <p>I&#8217;m Vishwa, founder of VishEra &#8212; an AI automation agency focused on helping small businesses in the restaurant and healthcare space eliminate repetitive tasks and focus on what matters most: their customers.</p>
         <p>With a strong foundation in AI &amp; Data Science, I build custom automation workflows that connect your existing tools, add intelligence, and run 24/7 without you lifting a finger.</p>
-        <p>Whether it's automating WhatsApp follow-ups, booking reminders, or customer feedback — I build solutions tailored exactly to your business.</p>
+        <p>Whether it&#8217;s automating WhatsApp follow-ups, booking reminders, or customer feedback &#8212; I build solutions tailored exactly to your business.</p>
       </div>
     </div>
   </section>
@@ -251,12 +410,12 @@
   <section id="services">
     <div class="section-tag">What I Do</div>
     <h2 class="section-title">Services that run<br/>your business for you</h2>
-    <p class="section-sub">Every service is custom-built for your business — no generic templates, no one-size-fits-all.</p>
+    <p class="section-sub">Every service is custom-built for your business &#8212; no generic templates, no one-size-fits-all.</p>
     <div class="services-grid">
       <div class="service-card">
         <div class="service-icon">&#129302;</div>
         <div class="service-title">WhatsApp AI Chatbot</div>
-        <p class="service-desc">An intelligent chatbot that instantly responds to customer enquiries, bookings, and FAQs on WhatsApp — 24/7, without any human involvement.</p>
+        <p class="service-desc">An intelligent chatbot that instantly responds to customer enquiries, bookings, and FAQs on WhatsApp &#8212; 24/7, without any human involvement.</p>
         <div class="service-targets"><span class="target-pill">&#127869;&#65039; Restaurants</span><span class="target-pill">&#127973;&#65039; Clinics</span></div>
       </div>
       <div class="service-card">
@@ -266,4 +425,1070 @@
         <div class="service-targets"><span class="target-pill">&#127973;&#65039; Clinics</span><span class="target-pill">&#127869;&#65039; Restaurants</span></div>
       </div>
       <div class="service-card">
-        <div class="service-icon">&#1
+        <div class="service-icon">&#128257;</div>
+        <div class="service-title">Lead Follow-Up System</div>
+        <p class="service-desc">Never lose a potential customer again. Automated multi-step follow-up sequences that nurture leads until they convert &#8212; all on autopilot.</p>
+        <div class="service-targets"><span class="target-pill">&#127869;&#65039; Restaurants</span><span class="target-pill">&#127973;&#65039; Clinics</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#11088;</div>
+        <div class="service-title">Review &amp; Feedback Automation</div>
+        <p class="service-desc">Automatically collect feedback after every visit and encourage happy customers to leave Google reviews &#8212; boosting your online reputation effortlessly.</p>
+        <div class="service-targets"><span class="target-pill">&#127869;&#65039; Restaurants</span><span class="target-pill">&#127973;&#65039; Clinics</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#128226;</div>
+        <div class="service-title">Promotional Broadcasts</div>
+        <p class="service-desc">Send personalized festive offers, seasonal promotions, and loyalty rewards to your customer list via WhatsApp &#8212; at the click of a button.</p>
+        <div class="service-targets"><span class="target-pill">&#127869;&#65039; Restaurants</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#128202;</div>
+        <div class="service-title">Custom AI Workflows</div>
+        <p class="service-desc">Have a unique problem? I build fully custom AI automation workflows tailored to your exact business process using Python, n8n, and AI APIs.</p>
+        <div class="service-targets"><span class="target-pill">&#127869;&#65039; Restaurants</span><span class="target-pill">&#127973;&#65039; Clinics</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects" id="projects">
+    <div class="section-tag">Portfolio</div>
+    <h2 class="section-title">Projects &amp; Sample Work</h2>
+    <p class="section-sub">Real automation flows and sample websites built for restaurants and clinics. Click any button below to explore live demos.</p>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <span class="project-badge">&#127869;&#65039; Sample Project</span>
+        <div class="project-title">South Indian Restaurant Website</div>
+        <p class="project-desc">A fully designed restaurant website for CurryLeaf with menu, table booking form, WhatsApp ordering and AI chatbot demo.</p>
+        <div class="project-tools">
+          <span class="tool-tag">HTML/CSS</span>
+          <span class="tool-tag">WhatsApp API</span>
+          <span class="tool-tag">AI Automation</span>
+        </div>
+        <button class="project-btn orange" onclick="openModal('restaurantModal')">&#9654; View Live Demo</button>
+      </div>
+
+      <div class="project-card">
+        <span class="project-badge blue">&#127973;&#65039; Sample Project</span>
+        <div class="project-title">MediCare Clinic Website</div>
+        <p class="project-desc">A professional clinic website with doctor profiles, appointment booking, AI automation section and WhatsApp integration for instant booking.</p>
+        <div class="project-tools">
+          <span class="tool-tag">HTML/CSS</span>
+          <span class="tool-tag">WhatsApp API</span>
+          <span class="tool-tag">AI Automation</span>
+        </div>
+        <button class="project-btn blue" onclick="openModal('clinicModal')">&#9654; View Live Demo</button>
+      </div>
+
+      <div class="project-card">
+        <span class="project-badge">&#128296; Automation Flow</span>
+        <div class="project-title">Restaurant WhatsApp Booking Bot</div>
+        <p class="project-desc">A fully automated WhatsApp bot for a local restaurant that handles table reservations, confirms bookings, and sends reminders &#8212; zero manual effort.</p>
+        <div class="project-tools">
+          <span class="tool-tag">WhatsApp API</span>
+          <span class="tool-tag">n8n</span>
+          <span class="tool-tag">ChatGPT API</span>
+          <span class="tool-tag">Google Sheets</span>
+        </div>
+        <button class="project-btn orange" onclick="openModal('restFlowModal')">&#128200; View Flow Diagram</button>
+      </div>
+
+      <div class="project-card">
+        <span class="project-badge blue">&#128296; Automation Flow</span>
+        <div class="project-title">Clinic Appointment Reminder System</div>
+        <p class="project-desc">An AI-powered system for clinics that automatically sends appointment confirmations, day-before reminders, and post-visit follow-up messages to patients.</p>
+        <div class="project-tools">
+          <span class="tool-tag">WhatsApp API</span>
+          <span class="tool-tag">Make</span>
+          <span class="tool-tag">Python</span>
+          <span class="tool-tag">Twilio</span>
+        </div>
+        <button class="project-btn blue" onclick="openModal('clinicFlowModal')">&#128200; View Flow Diagram</button>
+      </div>
+
+      <div class="project-card">
+        <span class="project-badge dark">&#129504; Coming Soon</span>
+        <div class="project-title">AI Lead Follow-Up Engine</div>
+        <p class="project-desc">A multi-step lead nurturing automation that follows up with potential customers across WhatsApp and email using personalized AI-generated messages.</p>
+        <div class="project-tools">
+          <span class="tool-tag">Claude API</span>
+          <span class="tool-tag">n8n</span>
+          <span class="tool-tag">Airtable</span>
+          <span class="tool-tag">WATI</span>
+        </div>
+        <button class="project-btn dark" onclick="openModal('leadFlowModal')">&#128200; View Flow Diagram</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-tag">Let&#8217;s Talk</div>
+    <h2 class="section-title">Ready to automate<br/>your business?</h2>
+    <p class="section-sub">Book a free 30-minute discovery call. No commitment, just clarity on how AI can work for you.</p>
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <a href="mailto:vishwas.work@gmail.com" class="contact-item">
+          <span>&#9993;&#65039;</span> vishwas.work@gmail.com
+        </a>
+        <a href="https://wa.me/919344381763" class="contact-item" target="_blank">
+          <span>&#128172;</span> +91 93443 81763
+        </a>
+      </div>
+      <form id="contactForm">
+        <div class="form-row">
+          <div class="form-group"><label>Your Name</label><input type="text" placeholder="John Doe" required /></div>
+          <div class="form-group"><label>Email Address</label><input type="email" placeholder="john@example.com" required /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Business Type</label>
+            <select>
+              <option value="">Select your business</option>
+              <option>Restaurant / Cafe</option>
+              <option>Clinic / Hospital</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group"><label>WhatsApp Number</label><input type="tel" placeholder="+91 98765 43210" /></div>
+        </div>
+        <div class="form-group"><label>How can I help you?</label><textarea placeholder="Tell me about your business and what you&#8217;d like to automate..."></textarea></div>
+        <button type="submit" class="form-submit">Send Message &#128640;</button>
+        <div class="success-msg" id="successMsg">&#9989; Message sent! I&#8217;ll get back to you within 24 hours.</div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&#169; 2025 <strong>VishEra</strong> &middot; Built by <strong>Vishwa S</strong> &middot; Powered by <span>AI</span></p>
+  </footer>
+
+
+  <!-- ============================= MODAL: RESTAURANT DEMO ============================= -->
+  <div class="modal-overlay" id="restaurantModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">&#127869;&#65039; CurryLeaf &#8212; South Indian Restaurant</div>
+        <button class="modal-close" onclick="closeModal('restaurantModal')">&#10005;</button>
+      </div>
+      <div class="modal-body">
+        <div class="rest-hero">
+          <div class="rest-logo-tag">Authentic South Indian Cuisine</div>
+          <div class="rest-name">CurryLeaf</div>
+          <div class="rest-tagline">&#127869; Flavours of Tamil Nadu &#8212; Chennai&#8217;s Favourite Thali</div>
+          <div class="rest-nav">
+            <button class="rest-nav-btn active" onclick="showRestTab('menu')">&#128196; Menu</button>
+            <button class="rest-nav-btn" onclick="showRestTab('booking')">&#128197; Book Table</button>
+            <button class="rest-nav-btn" onclick="showRestTab('chatbot')">&#129302; WhatsApp Bot</button>
+          </div>
+        </div>
+
+        <!-- MENU TAB -->
+        <div class="rest-section active" id="rest-menu">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.8rem;">&#11088; Today&#8217;s Special Menu &#8212; All prices inclusive of GST</p>
+          <div class="menu-grid">
+            <div class="menu-item">
+              <div class="menu-veg"></div>
+              <div class="menu-item-emoji">&#127798;</div>
+              <div class="menu-item-name">Ghee Pongal</div>
+              <div class="menu-item-desc">Soft rice &amp; lentils with cashews, ghee &amp; pepper</div>
+              <div class="menu-item-price">&#8377;80</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-veg"></div>
+              <div class="menu-item-emoji">&#129367;</div>
+              <div class="menu-item-name">Masala Dosa</div>
+              <div class="menu-item-desc">Crispy dosa with spiced potato filling &amp; chutneys</div>
+              <div class="menu-item-price">&#8377;95</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-veg"></div>
+              <div class="menu-item-emoji">&#127868;</div>
+              <div class="menu-item-name">Meals (Thali)</div>
+              <div class="menu-item-desc">Full meal with rice, sambar, rasam, kootu &amp; payasam</div>
+              <div class="menu-item-price">&#8377;180</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-veg"></div>
+              <div class="menu-item-emoji">&#127857;</div>
+              <div class="menu-item-name">Idli Sambar</div>
+              <div class="menu-item-desc">Soft steamed idlis with aromatic sambar &amp; chutney</div>
+              <div class="menu-item-price">&#8377;60</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-veg"></div>
+              <div class="menu-item-emoji">&#127869;</div>
+              <div class="menu-item-name">Chettinad Curry</div>
+              <div class="menu-item-desc">Signature spicy Chettinad vegetable curry</div>
+              <div class="menu-item-price">&#8377;140</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-veg"></div>
+              <div class="menu-item-emoji">&#9749;</div>
+              <div class="menu-item-name">Filter Coffee</div>
+              <div class="menu-item-desc">Traditional decoction with frothy milk</div>
+              <div class="menu-item-price">&#8377;30</div>
+            </div>
+          </div>
+          <div style="margin-top:1rem;background:#fff8f0;border-radius:12px;padding:1rem;font-size:0.8rem;color:var(--muted);">
+            &#128172; <strong style="color:var(--accent);">Order via WhatsApp:</strong> Send us your order to <strong>+91 93443 81763</strong> and get a 10% discount on your first order! &#127881;
+          </div>
+        </div>
+
+        <!-- BOOKING TAB -->
+        <div class="rest-section" id="rest-booking">
+          <div class="booking-form-demo">
+            <h4>&#128197; Reserve Your Table</h4>
+            <div class="demo-row">
+              <input class="demo-input" type="text" id="bk-name" placeholder="Your Name" />
+              <input class="demo-input" type="tel" id="bk-phone" placeholder="WhatsApp Number" />
+            </div>
+            <div class="demo-row">
+              <input class="demo-input" type="date" id="bk-date" />
+              <select class="demo-input" id="bk-time">
+                <option value="">Select Time</option>
+                <option>12:00 PM</option>
+                <option>12:30 PM</option>
+                <option>1:00 PM</option>
+                <option>7:00 PM</option>
+                <option>7:30 PM</option>
+                <option>8:00 PM</option>
+              </select>
+            </div>
+            <select class="demo-input" id="bk-guests">
+              <option value="">Number of Guests</option>
+              <option>1 Guest</option>
+              <option>2 Guests</option>
+              <option>3-4 Guests</option>
+              <option>5-6 Guests</option>
+              <option>7+ Guests</option>
+            </select>
+            <button class="demo-btn" onclick="simulateBooking()">&#9989; Book Table &amp; Get WhatsApp Confirmation</button>
+            <div class="wa-msg-box" id="restBookingMsg">
+              <h5><span class="wa-icon">&#128172;</span> WhatsApp Confirmation Sent!</h5>
+              <p id="restBookingText"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHATBOT TAB -->
+        <div class="rest-section" id="rest-chatbot">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.8rem;">&#9889; Live AI chatbot simulation. Try asking about the menu, booking, timings or special offers!</p>
+          <div class="chatbot-window">
+            <div class="chatbot-header">
+              <div class="chat-avatar">&#127869;</div>
+              <div>
+                <div class="chat-name">CurryLeaf Assistant</div>
+                <div class="chat-status">&#128994; Online &#8212; AI Powered</div>
+              </div>
+            </div>
+            <div class="chat-messages" id="restChatMessages">
+              <div class="chat-msg bot">&#128075; Vanakkam! Welcome to CurryLeaf. I&#8217;m your AI assistant. How can I help you today?<br/><br/>You can ask me about: Menu, Timings, Table Booking, Special Offers, or Directions &#128205;</div>
+            </div>
+            <div class="chat-input-row">
+              <input class="chat-input" type="text" id="restChatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter') sendRestChat()" />
+              <button class="chat-send" onclick="sendRestChat()">&#10148;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================= MODAL: CLINIC DEMO ============================= -->
+  <div class="modal-overlay" id="clinicModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">&#127973;&#65039; MediCare Clinic &#8212; Multi-Specialty</div>
+        <button class="modal-close" onclick="closeModal('clinicModal')">&#10005;</button>
+      </div>
+      <div class="modal-body">
+        <div class="clinic-hero">
+          <div class="clinic-badge">&#127973;&#65039; Multi-Specialty Clinic</div>
+          <div class="clinic-name">MediCare Clinic</div>
+          <div class="clinic-tagline">&#9889; AI-Powered Appointments &#8212; Your Health, Our Priority</div>
+          <div class="clinic-nav">
+            <button class="clinic-nav-btn active" onclick="showClinicTab('doctors')">&#128084; Doctors</button>
+            <button class="clinic-nav-btn" onclick="showClinicTab('appointment')">&#128197; Book Appointment</button>
+            <button class="clinic-nav-btn" onclick="showClinicTab('chatbot')">&#129302; AI Assistant</button>
+          </div>
+        </div>
+
+        <!-- DOCTORS TAB -->
+        <div class="clinic-section active" id="clinic-doctors">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.8rem;">Our experienced specialists are available 6 days a week.</p>
+          <div class="doctor-grid">
+            <div class="doctor-card">
+              <div class="doctor-avatar">&#128084;</div>
+              <div class="doctor-name">Dr. Priya Raman</div>
+              <div class="doctor-spec">General Physician</div>
+              <div class="doctor-exp">12 years experience</div>
+              <div class="doctor-slots">
+                <span class="slot-pill">9 AM</span>
+                <span class="slot-pill">11 AM</span>
+                <span class="slot-pill">4 PM</span>
+              </div>
+            </div>
+            <div class="doctor-card">
+              <div class="doctor-avatar">&#128139;</div>
+              <div class="doctor-name">Dr. Arjun Nair</div>
+              <div class="doctor-spec">Cardiologist</div>
+              <div class="doctor-exp">18 years experience</div>
+              <div class="doctor-slots">
+                <span class="slot-pill">10 AM</span>
+                <span class="slot-pill">2 PM</span>
+              </div>
+            </div>
+            <div class="doctor-card">
+              <div class="doctor-avatar">&#129504;</div>
+              <div class="doctor-name">Dr. Kavitha S</div>
+              <div class="doctor-spec">Dermatologist</div>
+              <div class="doctor-exp">8 years experience</div>
+              <div class="doctor-slots">
+                <span class="slot-pill">11 AM</span>
+                <span class="slot-pill">5 PM</span>
+              </div>
+            </div>
+            <div class="doctor-card">
+              <div class="doctor-avatar">&#129517;</div>
+              <div class="doctor-name">Dr. Suresh M</div>
+              <div class="doctor-spec">Orthopedics</div>
+              <div class="doctor-exp">15 years experience</div>
+              <div class="doctor-slots">
+                <span class="slot-pill">9 AM</span>
+                <span class="slot-pill">3 PM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- APPOINTMENT TAB -->
+        <div class="clinic-section" id="clinic-appointment">
+          <div class="booking-form-demo">
+            <h4>&#128197; Book an Appointment</h4>
+            <div class="demo-row">
+              <input class="demo-input" type="text" id="cl-name" placeholder="Patient Name" />
+              <input class="demo-input" type="tel" id="cl-phone" placeholder="WhatsApp Number" />
+            </div>
+            <select class="demo-input" id="cl-doctor">
+              <option value="">Select Doctor</option>
+              <option>Dr. Priya Raman &#8212; General Physician</option>
+              <option>Dr. Arjun Nair &#8212; Cardiologist</option>
+              <option>Dr. Kavitha S &#8212; Dermatologist</option>
+              <option>Dr. Suresh M &#8212; Orthopedics</option>
+            </select>
+            <div class="demo-row">
+              <input class="demo-input" type="date" id="cl-date" />
+              <select class="demo-input" id="cl-time">
+                <option value="">Select Time</option>
+                <option>9:00 AM</option>
+                <option>10:00 AM</option>
+                <option>11:00 AM</option>
+                <option>2:00 PM</option>
+                <option>4:00 PM</option>
+                <option>5:00 PM</option>
+              </select>
+            </div>
+            <input class="demo-input" type="text" id="cl-reason" placeholder="Reason for visit (optional)" />
+            <button class="demo-btn" style="background:#0066FF;" onclick="simulateClinicBooking()">&#9989; Confirm &amp; Get WhatsApp Reminder</button>
+            <div class="appt-confirm-box" id="clinicConfirmMsg">
+              <h5>&#9989; Appointment Confirmed &#8212; WhatsApp Notification Sent!</h5>
+              <p id="clinicConfirmText"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHATBOT TAB -->
+        <div class="clinic-section" id="clinic-chatbot">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.8rem;">&#9889; AI health assistant. Ask about doctors, timings, symptoms guidance, or how to book.</p>
+          <div class="chatbot-window">
+            <div class="chatbot-header" style="background:#0d47a1;">
+              <div class="chat-avatar" style="background:#0066FF;">&#127973;</div>
+              <div>
+                <div class="chat-name">MediCare AI Assistant</div>
+                <div class="chat-status">&#128994; Online &#8212; Available 24/7</div>
+              </div>
+            </div>
+            <div class="chat-messages" id="clinicChatMessages">
+              <div class="chat-msg bot">&#128075; Hello! I&#8217;m the MediCare AI Assistant. I can help you with:<br/><br/>&#128084; Find a Doctor &nbsp;&nbsp; &#128197; Book Appointment<br/>&#9203; Clinic Timings &nbsp;&nbsp; &#128222; Emergency Contact<br/><br/>How can I assist you today?</div>
+            </div>
+            <div class="chat-input-row">
+              <input class="chat-input" type="text" id="clinicChatInput" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter') sendClinicChat()" />
+              <button class="chat-send" style="background:#0066FF;" onclick="sendClinicChat()">&#10148;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================= MODAL: RESTAURANT FLOW ============================= -->
+  <div class="modal-overlay" id="restFlowModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">&#128200; Restaurant WhatsApp Booking Bot &#8212; Automation Flow</div>
+        <button class="modal-close" onclick="closeModal('restFlowModal')">&#10005;</button>
+      </div>
+      <div class="modal-body">
+        <div class="flow-container">
+          <div class="flow-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#ff9800;"></div> Trigger</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#9c27b0;"></div> AI Processing</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#1976d2;"></div> Action</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#fbc02d;"></div> Decision</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#388e3c;"></div> Output</div>
+          </div>
+
+          <div class="flow-nodes">
+
+            <div class="flow-node nd-trigger">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#128172;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Trigger</div>
+                <div class="flow-node-title">Customer Messages on WhatsApp</div>
+                <div class="flow-node-desc">A customer sends any message to the restaurant&#8217;s WhatsApp number &#8212; &#8220;book table&#8221;, &#8220;menu&#8221;, &#8220;timings&#8221;, or any query.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">WATI / WhatsApp Business API</span>
+                  <span class="flow-tool">Webhook</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-node nd-ai">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#129504;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">AI Processing</div>
+                <div class="flow-node-title">ChatGPT Classifies Intent</div>
+                <div class="flow-node-desc">The message is sent to ChatGPT API to detect intent: booking request, menu query, timings, or general inquiry.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">ChatGPT API (GPT-4o)</span>
+                  <span class="flow-tool">n8n HTTP Node</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-node nd-condition">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#128336;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Decision</div>
+                <div class="flow-node-title">Route Based on Intent</div>
+                <div class="flow-node-desc">n8n Switch node routes to the correct workflow branch based on detected intent.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">n8n Switch Node</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-branch">
+              <div class="flow-branch-title">BRANCH ROUTES:</div>
+              <div class="flow-branch-item">&#127869; Menu Query &#8594; Send formatted menu image + price list via WhatsApp</div>
+              <div class="flow-branch-item">&#9203; Timings Query &#8594; Auto-reply with opening hours &amp; location</div>
+              <div class="flow-branch-item">&#128197; Booking Request &#8594; Start booking collection flow (next steps below)</div>
+              <div class="flow-branch-item">&#10067; General Query &#8594; AI generates a helpful contextual response</div>
+            </div>
+
+            <div class="flow-node nd-action">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#128203;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Action &#8212; Booking Flow</div>
+                <div class="flow-node-title">Collect Booking Details via Chat</div>
+                <div class="flow-node-desc">Bot asks for: date, time, number of guests, and special requests &#8212; one question at a time in a friendly conversational flow.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">WATI Message Templates</span>
+                  <span class="flow-tool">n8n Wait Node</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-node nd-action">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#128202;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Action</div>
+                <div class="flow-node-title">Check Table Availability</div>
+                <div class="flow-node-desc">The system checks Google Sheets (bookings database) to verify if the requested slot is available for the given date and number of guests.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">Google Sheets API</span>
+                  <span class="flow-tool">n8n Google Sheets Node</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-node nd-condition">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#10067;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Decision</div>
+                <div class="flow-node-title">Table Available?</div>
+                <div class="flow-node-desc">If available &#8594; proceed to confirm. If not &#8594; offer next available slot via WhatsApp.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">n8n IF Node</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-node nd-output">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#9989;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Output</div>
+                <div class="flow-node-title">Save Booking &amp; Confirm via WhatsApp</div>
+                <div class="flow-node-desc">Booking is saved to Google Sheets. Customer receives a WhatsApp confirmation with booking ID, date, time, and restaurant address.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">Google Sheets</span>
+                  <span class="flow-tool">WhatsApp Message</span>
+                  <span class="flow-tool">n8n</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-node nd-output">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#9200;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Output</div>
+                <div class="flow-node-title">Automated Reminders</div>
+                <div class="flow-node-desc">Day-before reminder at 10 AM + 1-hour-before reminder sent automatically. Post-visit feedback message sent 2 hours after booking time.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">n8n Schedule Trigger</span>
+                  <span class="flow-tool">WhatsApp API</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-node nd-end">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#127881;</div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Result</div>
+                <div class="flow-node-title">Zero Manual Effort &#8212; 24/7 Bookings</div>
+                <div class="flow-node-desc">The entire flow runs autonomously. The restaurant owner only needs to check Google Sheets for daily bookings &#8212; no calls, no manual confirmations needed.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">Saves 10+ hours/week</span>
+                  <span class="flow-tool">0 missed bookings</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================= MODAL: CLINIC FLOW ============================= -->
+  <div class="modal-overlay" id="clinicFlowModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">&#128200; Clinic Appointment Reminder System &#8212; Automation Flow</div>
+        <button class="modal-close" onclick="closeModal('clinicFlowModal')">&#10005;</button>
+      </div>
+      <div class="modal-body">
+        <div class="flow-container">
+          <div class="flow-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#ff9800;"></div> Trigger</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#9c27b0;"></div> AI Processing</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#1976d2;"></div> Action</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#fbc02d;"></div> Decision</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#388e3c;"></div> Output</div>
+          </div>
+
+          <div class="flow-nodes">
+
+            <div class="flow-node nd-trigger">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#128203;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Trigger</div>
+                <div class="flow-node-title">New Appointment Booked</div>
+                <div class="flow-node-desc">Patient fills appointment form on clinic website or WhatsApp. Data is captured via webhook and stored in the system.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">Website Form / WhatsApp</span>
+                  <span class="flow-tool">Webhook</span>
+                  <span class="flow-tool">Make (Integromat)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-node nd-action">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#128190;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Action</div>
+                <div class="flow-node-title">Store Patient Record</div>
+                <div class="flow-node-desc">Patient details (name, phone, doctor, date, time) are saved to Google Sheets and a unique booking ID is generated.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">Google Sheets</span>
+                  <span class="flow-tool">Python UUID Generator</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-node nd-output">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#128172;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Output &#8212; Immediate</div>
+                <div class="flow-node-title">Instant Confirmation Message</div>
+                <div class="flow-node-desc">Within 60 seconds of booking, patient receives a WhatsApp confirmation with: doctor name, date, time, clinic address, and booking reference number.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">Twilio WhatsApp API</span>
+                  <span class="flow-tool">Make Scenario</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-node nd-action">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#9200;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Action</div>
+                <div class="flow-node-title">Schedule Reminder Sequence</div>
+                <div class="flow-node-desc">The system schedules 3 automated reminder messages based on appointment time: 24-hour reminder, 2-hour reminder, and post-visit follow-up.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">Python APScheduler</span>
+                  <span class="flow-tool">Make Schedule Module</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-branch">
+              <div class="flow-branch-title">SCHEDULED REMINDER SEQUENCE:</div>
+              <div class="flow-branch-item">24 hrs before &#8594; &#8220;Reminder: Your appointment with [Doctor] is tomorrow at [Time]. Reply CONFIRM or CANCEL.&#8221;</div>
+              <div class="flow-branch-item">2 hrs before &#8594; &#8220;Your appointment is in 2 hours! Please arrive 10 mins early. Clinic: [Address]&#8221;</div>
+              <div class="flow-branch-item">2 hrs after &#8594; &#8220;How was your visit today? Please rate your experience (1-5) &#8212; your feedback helps us improve!&#8221;</div>
+            </div>
+
+            <div class="flow-node nd-condition">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#128336;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Decision</div>
+                <div class="flow-node-title">Patient Confirms or Cancels?</div>
+                <div class="flow-node-desc">When patient replies to the 24-hr reminder, the system detects CONFIRM or CANCEL and routes accordingly.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">Make Text Parser</span>
+                  <span class="flow-tool">Keyword Detection</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-branch">
+              <div class="flow-branch-title">CONFIRMATION BRANCHES:</div>
+              <div class="flow-branch-item">CONFIRM &#8594; Send &#8220;Great! See you tomorrow. Bring your previous prescriptions if any.&#8221; + mark confirmed in Sheet</div>
+              <div class="flow-branch-item">CANCEL &#8594; Send &#8220;Appointment cancelled. Would you like to reschedule?&#8221; + free up slot in Sheet + notify receptionist</div>
+              <div class="flow-branch-item">No Reply &#8594; Send one follow-up after 4 hours, then mark as &#8220;Unconfirmed&#8221; in Sheet</div>
+            </div>
+
+            <div class="flow-node nd-ai">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#11088;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">AI Processing</div>
+                <div class="flow-node-title">Analyze Feedback &amp; Generate Response</div>
+                <div class="flow-node-desc">Post-visit feedback is analyzed by AI. Happy patients (4-5 stars) are prompted to leave a Google Review. Others receive a personalized apology &amp; resolution message.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">ChatGPT API</span>
+                  <span class="flow-tool">Sentiment Analysis</span>
+                  <span class="flow-tool">Python</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-node nd-end">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#127775;</div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Result</div>
+                <div class="flow-node-title">70% Fewer No-Shows &#8212; More Google Reviews</div>
+                <div class="flow-node-desc">Clinics using this system see drastically reduced no-shows, improved patient communication, and a steady stream of Google reviews &#8212; all on complete autopilot.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">Saves 15+ hrs/week</span>
+                  <span class="flow-tool">70% fewer no-shows</span>
+                  <span class="flow-tool">More 5&#9733; Reviews</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================= MODAL: LEAD FLOW ============================= -->
+  <div class="modal-overlay" id="leadFlowModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">&#128200; AI Lead Follow-Up Engine &#8212; Automation Flow</div>
+        <button class="modal-close" onclick="closeModal('leadFlowModal')">&#10005;</button>
+      </div>
+      <div class="modal-body">
+        <div class="flow-container">
+          <div class="flow-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#ff9800;"></div> Trigger</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#9c27b0;"></div> AI Processing</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#1976d2;"></div> Action</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#fbc02d;"></div> Decision</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#388e3c;"></div> Output</div>
+          </div>
+
+          <div class="flow-nodes">
+
+            <div class="flow-node nd-trigger">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#128101;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Trigger</div>
+                <div class="flow-node-title">New Lead Enters System</div>
+                <div class="flow-node-desc">A potential customer enquires via website form, WhatsApp, Instagram DM, or a Google Ads landing page. Lead data captured and stored.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">WATI / WhatsApp</span>
+                  <span class="flow-tool">Airtable</span>
+                  <span class="flow-tool">n8n Webhook</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-node nd-ai">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#129504;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">AI Processing</div>
+                <div class="flow-node-title">Personalize Opening Message</div>
+                <div class="flow-node-desc">Claude API generates a personalized first message using the lead&#8217;s name, business type, and query context. No generic templates &#8212; every message feels human.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">Claude API (Haiku)</span>
+                  <span class="flow-tool">Dynamic Prompt</span>
+                  <span class="flow-tool">n8n</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-node nd-output">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#128172;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Output &#8212; Day 0</div>
+                <div class="flow-node-title">Instant WhatsApp Outreach</div>
+                <div class="flow-node-desc">Within 5 minutes of lead capture, a warm, personalized WhatsApp message is sent introducing VishEra&#8217;s services relevant to their specific business.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">WATI API</span>
+                  <span class="flow-tool">WhatsApp Template</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-node nd-condition">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#128336;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Decision</div>
+                <div class="flow-node-title">Lead Responds?</div>
+                <div class="flow-node-desc">System monitors for a reply within 24 hours and branches accordingly.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">n8n Wait + IF Node</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-branch">
+              <div class="flow-branch-title">FOLLOW-UP SEQUENCE (if no response):</div>
+              <div class="flow-branch-item">Day 2 &#8594; WhatsApp follow-up: share a relevant case study or result (e.g. &#8220;We helped a Chennai restaurant save 12hrs/week&#8221;)</div>
+              <div class="flow-branch-item">Day 5 &#8594; Email follow-up with detailed proposal PDF auto-generated by AI</div>
+              <div class="flow-branch-item">Day 10 &#8594; Final WhatsApp: limited-time free audit offer to create urgency</div>
+              <div class="flow-branch-item">Day 15 &#8594; Mark as cold lead in Airtable, move to monthly newsletter list</div>
+            </div>
+
+            <div class="flow-node nd-ai">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#128233;</div>
+                <div class="flow-line"></div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">AI Processing</div>
+                <div class="flow-node-title">Auto-Generate Proposal PDF</div>
+                <div class="flow-node-desc">Claude API generates a custom proposal document tailored to the lead&#8217;s business type, estimated ROI, and recommended services. Sent as PDF via email.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">Claude API</span>
+                  <span class="flow-tool">Python PDF Generator</span>
+                  <span class="flow-tool">Gmail API</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-node nd-end">
+              <div class="flow-node-left">
+                <div class="flow-dot">&#128176;</div>
+              </div>
+              <div class="flow-node-body">
+                <div class="flow-node-label">Result</div>
+                <div class="flow-node-title">2x More Conversions &#8212; Zero Manual Follow-Up</div>
+                <div class="flow-node-desc">The complete multi-channel follow-up sequence runs automatically. Every lead gets a personalized experience without a single manual message being sent.</div>
+                <div class="flow-node-tools">
+                  <span class="flow-tool">2x Conversion Rate</span>
+                  <span class="flow-tool">0 Manual Messages</span>
+                  <span class="flow-tool">Fully Automated</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    // ===================== MODAL SYSTEM =====================
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeModal(overlay.id);
+      });
+    });
+
+    // ===================== RESTAURANT TABS =====================
+    function showRestTab(tab) {
+      document.querySelectorAll('.rest-section').forEach(function(s) { s.classList.remove('active'); });
+      document.querySelectorAll('.rest-nav-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.getElementById('rest-' + tab).classList.add('active');
+      var btns = document.querySelectorAll('.rest-nav-btn');
+      var tabMap = { menu: 0, booking: 1, chatbot: 2 };
+      btns[tabMap[tab]].classList.add('active');
+    }
+
+    // ===================== CLINIC TABS =====================
+    function showClinicTab(tab) {
+      document.querySelectorAll('.clinic-section').forEach(function(s) { s.classList.remove('active'); });
+      document.querySelectorAll('.clinic-nav-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.getElementById('clinic-' + tab).classList.add('active');
+      var btns = document.querySelectorAll('.clinic-nav-btn');
+      var tabMap = { doctors: 0, appointment: 1, chatbot: 2 };
+      btns[tabMap[tab]].classList.add('active');
+    }
+
+    // ===================== RESTAURANT BOOKING SIMULATION =====================
+    function simulateBooking() {
+      var name = document.getElementById('bk-name').value.trim() || 'Guest';
+      var phone = document.getElementById('bk-phone').value.trim() || '+91 XXXXXXXXXX';
+      var date = document.getElementById('bk-date').value;
+      var time = document.getElementById('bk-time').value;
+      var guests = document.getElementById('bk-guests').value;
+      if (!date) date = new Date(Date.now() + 86400000).toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short' });
+      else {
+        var d = new Date(date);
+        date = d.toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
+      }
+      if (!time) time = '7:30 PM';
+      if (!guests) guests = '2 Guests';
+      var bookingId = 'CL' + Math.floor(Math.random() * 9000 + 1000);
+      var msg = '&#127869; *CurryLeaf &#8212; Table Booking Confirmed!*\n\n' +
+        '&#128100; Name: ' + name + '\n' +
+        '&#128197; Date: ' + date + '\n' +
+        '&#8987; Time: ' + time + '\n' +
+        '&#128101; Guests: ' + guests + '\n' +
+        '&#128203; Booking ID: #' + bookingId + '\n\n' +
+        '&#128205; *Location:* CurryLeaf, Anna Nagar, Chennai\n' +
+        '&#9201; *Arrive* 5 mins early to get the best seat!\n\n' +
+        'Reply *CANCEL* to cancel your reservation.\nSee you soon! &#127881;';
+      var box = document.getElementById('restBookingMsg');
+      document.getElementById('restBookingText').innerHTML = msg;
+      box.classList.add('show');
+    }
+
+    // ===================== CLINIC BOOKING SIMULATION =====================
+    function simulateClinicBooking() {
+      var name = document.getElementById('cl-name').value.trim() || 'Patient';
+      var phone = document.getElementById('cl-phone').value.trim() || '+91 XXXXXXXXXX';
+      var doctor = document.getElementById('cl-doctor').value || 'Dr. Priya Raman &#8212; General Physician';
+      var date = document.getElementById('cl-date').value;
+      var time = document.getElementById('cl-time').value;
+      if (!date) date = new Date(Date.now() + 86400000).toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short' });
+      else {
+        var d = new Date(date);
+        date = d.toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
+      }
+      if (!time) time = '10:00 AM';
+      var bookingId = 'MC' + Math.floor(Math.random() * 9000 + 1000);
+      var msg = '&#127973; *MediCare Clinic &#8212; Appointment Confirmed!*\n\n' +
+        '&#128100; Patient: ' + name + '\n' +
+        '&#128084; Doctor: ' + doctor + '\n' +
+        '&#128197; Date: ' + date + '\n' +
+        '&#9201; Time: ' + time + '\n' +
+        '&#128203; Booking ID: #' + bookingId + '\n\n' +
+        '&#128205; *Clinic:* MediCare, T. Nagar, Chennai &#8212; 600017\n' +
+        '&#128222; Emergency: +91 93443 81763\n\n' +
+        '&#8505;&#65039; Please bring your previous reports &amp; prescriptions.\n\n' +
+        '*Reminder will be sent 24 hrs before your appointment.*\n' +
+        'Reply CANCEL to cancel. Get well soon! &#128138;';
+      var box = document.getElementById('clinicConfirmMsg');
+      document.getElementById('clinicConfirmText').innerHTML = msg;
+      box.classList.add('show');
+    }
+
+    // ===================== RESTAURANT CHATBOT =====================
+    var restResponses = {
+      'menu': '&#127869; Here is today\'s menu highlights:\n\n&#127798; Ghee Pongal &#8212; &#8377;80\n&#129367; Masala Dosa &#8212; &#8377;95\n&#127868; Full Meals (Thali) &#8212; &#8377;180\n&#127857; Idli Sambar &#8212; &#8377;60\n&#127869; Chettinad Curry &#8212; &#8377;140\n&#9749; Filter Coffee &#8212; &#8377;30\n\nAll items are freshly prepared! &#128523;',
+      'book': '&#128197; I can help you book a table!\n\nPlease share:\n1. Your name\n2. Date &amp; time\n3. Number of guests\n\nOr click the &#8220;Book Table&#8221; tab above for our quick booking form! &#9989;',
+      'timing': '&#9201; CurryLeaf is open:\n\n&#127780;&#65039; Lunch: 11:30 AM &#8211; 3:30 PM\n&#127770;&#65039; Dinner: 7:00 PM &#8211; 10:30 PM\n\nWe are open all 7 days! &#127881;',
+      'time': '&#9201; CurryLeaf is open:\n\n&#127780;&#65039; Lunch: 11:30 AM &#8211; 3:30 PM\n&#127770;&#65039; Dinner: 7:00 PM &#8211; 10:30 PM\n\nWe are open all 7 days! &#127881;',
+      'offer': '&#127873; Current Special Offers:\n\n&#11088; 10% OFF on first WhatsApp order\n&#127815; Family Thali (4 persons) at &#8377;600\n&#9749; Free filter coffee with every meals order on weekdays!\n\nMention code *CURRY10* while ordering &#128521;',
+      'location': '&#128205; We are located at:\n\nCurryLeaf Restaurant\nNo. 12, Anna Nagar East\nChennai &#8211; 600102\n\n&#128652; 5 mins from Koyambedu Metro Station\n\nGoogle Maps link will be shared on request!',
+      'address': '&#128205; We are located at:\n\nCurryLeaf Restaurant\nNo. 12, Anna Nagar East\nChennai &#8211; 600102\n\n&#128652; 5 mins from Koyambedu Metro Station',
+      'order': '&#127869; You can order via WhatsApp!\n\nJust message us your order at *+91 93443 81763* and get 10% OFF on your first order! &#128523;\n\nDelivery available within 5km radius.',
+      'hi': '&#128075; Vanakkam! How can I help you today?\n\nTry asking about: Menu, Timings, Booking, Offers, or Location &#128205;',
+      'hello': '&#128075; Hello! Welcome to CurryLeaf!\n\nHow can I assist you? Ask me about our menu, timings, table booking, or special offers! &#127869;',
+      'default': '&#129504; Thank you for your message! For this query, I\'ll connect you with our team.\n\nOr feel free to ask about: &#127869; Menu &nbsp;|&nbsp; &#9201; Timings &nbsp;|&nbsp; &#128197; Booking &nbsp;|&nbsp; &#127873; Offers &nbsp;|&nbsp; &#128205; Location'
+    };
+
+    function sendRestChat() {
+      var input = document.getElementById('restChatInput');
+      var msg = input.value.trim();
+      if (!msg) return;
+      input.value = '';
+      var container = document.getElementById('restChatMessages');
+      var userDiv = document.createElement('div');
+      userDiv.className = 'chat-msg user';
+      userDiv.innerHTML = msg;
+      container.appendChild(userDiv);
+
+      var typingDiv = document.createElement('div');
+      typingDiv.className = 'chat-msg typing';
+      typingDiv.innerHTML = 'typing...';
+      container.appendChild(typingDiv);
+      container.scrollTop = container.scrollHeight;
+
+      var lower = msg.toLowerCase();
+      var response = restResponses['default'];
+      for (var key in restResponses) {
+        if (lower.indexOf(key) !== -1) { response = restResponses[key]; break; }
+      }
+
+      setTimeout(function() {
+        container.removeChild(typingDiv);
+        var botDiv = document.createElement('div');
+        botDiv.className = 'chat-msg bot';
+        botDiv.innerHTML = response;
+        container.appendChild(botDiv);
+        container.scrollTop = container.scrollHeight;
+      }, 900);
+    }
+
+    // ===================== CLINIC CHATBOT =====================
+    var clinicResponses = {
+      'doctor': '&#128084; Our Specialists:\n\n&#128084; Dr. Priya Raman &#8212; General Physician (12 yrs)\n&#128139; Dr. Arjun Nair &#8212; Cardiologist (18 yrs)\n&#129504; Dr. Kavitha S &#8212; Dermatologist (8 yrs)\n&#129517; Dr. Suresh M &#8212; Orthopedics (15 yrs)\n\nClick the &#8220;Book Appointment&#8221; tab to schedule!',
+      'book': '&#128197; To book an appointment:\n\n1. Click &#8220;Book Appointment&#8221; tab above\n2. Select your doctor\n3. Choose date &amp; time\n4. Enter your details\n\nYou&#8217;ll receive a WhatsApp confirmation instantly! &#9989;',
+      'appoint': '&#128197; I can help you book! Please:\n\n1. Click the &#8220;Book Appointment&#8221; tab\n2. Fill in your details\n\nOr tell me:\n- Which doctor?\n- Preferred date &amp; time?',
+      'timing': '&#9201; MediCare Clinic Timings:\n\n&#127780;&#65039; Morning: 9:00 AM &#8211; 1:00 PM\n&#127770;&#65039; Evening: 4:00 PM &#8211; 8:00 PM\n\nOpen Monday to Saturday &#127881;\n(Emergency services available 24/7)',
+      'time': '&#9201; MediCare Clinic Timings:\n\n&#127780;&#65039; Morning: 9:00 AM &#8211; 1:00 PM\n&#127770;&#65039; Evening: 4:00 PM &#8211; 8:00 PM\n\nOpen Monday to Saturday',
+      'emergency': '&#128222; Emergency Contact:\n\n&#128694;&#127995; For medical emergencies, call us immediately:\n*+91 93443 81763*\n\nWe are connected with Apollo Hospital for critical referrals.',
+      'location': '&#128205; MediCare Clinic\nNo. 45, T. Nagar Main Road\nChennai &#8211; 600017\n\n&#128652; 3 mins from T. Nagar Bus Stand\n&#128663; Free parking available',
+      'address': '&#128205; MediCare Clinic\nNo. 45, T. Nagar Main Road\nChennai &#8211; 600017\n\n&#128652; 3 mins from T. Nagar Bus Stand',
+      'fee': '&#128176; Consultation Fees:\n\n&#128084; General Physician &#8212; &#8377;300\n&#128139; Cardiologist &#8212; &#8377;600\n&#129504; Dermatologist &#8212; &#8377;400\n&#129517; Orthopedics &#8212; &#8377;500\n\nPayment via Cash, UPI, or Card accepted.',
+      'hi': '&#128075; Hello! Welcome to MediCare Clinic.\n\nI can help you with:\n&#128084; Find a Doctor\n&#128197; Book Appointment\n&#9201; Clinic Timings\n&#128222; Emergency Contact\n\nHow can I assist you?',
+      'hello': '&#128075; Namaskaram! Welcome to MediCare.\n\nHow can I help you today? Ask about doctors, appointments, fees, or timings!',
+      'default': '&#129504; Thank you for reaching out! For this specific query, our medical staff will assist you.\n\n&#128222; Call us: +91 93443 81763\n\nOr ask me: &#128084; Doctors &nbsp;|&nbsp; &#128197; Booking &nbsp;|&nbsp; &#9201; Timings &nbsp;|&nbsp; &#128176; Fees'
+    };
+
+    function sendClinicChat() {
+      var input = document.getElementById('clinicChatInput');
+      var msg = input.value.trim();
+      if (!msg) return;
+      input.value = '';
+      var container = document.getElementById('clinicChatMessages');
+      var userDiv = document.createElement('div');
+      userDiv.className = 'chat-msg user';
+      userDiv.innerHTML = msg;
+      container.appendChild(userDiv);
+
+      var typingDiv = document.createElement('div');
+      typingDiv.className = 'chat-msg typing';
+      typingDiv.innerHTML = 'typing...';
+      container.appendChild(typingDiv);
+      container.scrollTop = container.scrollHeight;
+
+      var lower = msg.toLowerCase();
+      var response = clinicResponses['default'];
+      for (var key in clinicResponses) {
+        if (lower.indexOf(key) !== -1) { response = clinicResponses[key]; break; }
+      }
+
+      setTimeout(function() {
+        container.removeChild(typingDiv);
+        var botDiv = document.createElement('div');
+        botDiv.className = 'chat-msg bot';
+        botDiv.innerHTML = response;
+        container.appendChild(botDiv);
+        container.scrollTop = container.scrollHeight;
+      }, 900);
+    }
+
+    // ===================== CONTACT FORM =====================
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('successMsg').style.display = 'block';
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>
